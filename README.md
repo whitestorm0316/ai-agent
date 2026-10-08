@@ -79,24 +79,22 @@ week09-10-multi-agent-project/
 
 ### 第一次：在电脑 A 上推到远端
 
+> 本机已完成：远端为 `git@github.com:whitestorm0316/ai-agent.git`，`main` 已推送并设置上游。
+> 下面步骤仅换仓库或换电脑时参考。
+
 先在 GitHub 或 Gitee 建一个**空仓库**（不要勾选自动生成 README），然后：
 
 ```bash
 # 在仓库根目录（就是有这个 README 的那一层）
 git remote add origin <你的仓库地址>
-
-# 示例：
-#   Gitee : git@gitee.com:<用户名>/ai-agent-roadmap.git
-#   GitHub: git@github.com:<用户名>/ai-agent-roadmap.git
-
 git push -u origin main
 ```
 
 ### 第一次：在电脑 B 上接上
 
 ```bash
-git clone <你的仓库地址> ai-agent-roadmap
-cd ai-agent-roadmap/week01-python-for-ai
+git clone git@github.com:whitestorm0316/ai-agent.git ai-agent
+cd ai-agent/week01-python-for-ai
 ./bootstrap.sh          # 装 uv、装依赖、生成 .env、跑一遍测试
 ```
 

@@ -1,5 +1,5 @@
 [project]
-name = "agent-week1"
+name = "week01-python-for-ai"
 version = "0.1.0"
 description = "AI Agent 转行学习 · 第 1 周：Python for AI 速成（Go 开发者视角）"
 readme = "README.md"
