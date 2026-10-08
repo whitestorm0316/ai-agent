@@ -6,5 +6,6 @@
 *.jpg binary
 *.pdf binary
 
-# uv.lock 是生成物，合并冲突时不要按行合并
-uv.lock -diff merge=binary
+# 注意：不要给 uv.lock 加 -diff 或 binary。
+# 它是 TOML 文本，标成二进制后改动完全看不到。
+# 遇到冲突时的正确做法：接受任一侧，然后重新跑 uv sync 生成。
