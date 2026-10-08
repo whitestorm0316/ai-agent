@@ -1,0 +1,28 @@
+# ---- WorkBuddy 工作区数据（工具元数据，不进仓库）----
+.workbuddy-ai/
+
+# ---- Python（各周子项目共用）----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+
+# ---- 环境变量：绝对不要提交 ----
+.env
+.env.local
+
+# ---- 实验输出 ----
+out/
+*.log
+
+# ---- 编辑器 / 系统 ----
+.idea/
+.vscode/
+.DS_Store

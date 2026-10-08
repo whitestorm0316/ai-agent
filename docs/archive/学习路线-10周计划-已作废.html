@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent 转行学习路线 · 10 周计划</title>
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#ffffff; --ink:#16181d; --ink2:#4a4f5a; --ink3:#868c99;
+    --line:#e6e8ee; --accent:#3557d6; --accent-soft:#eaefff;
+    --teal:#0f9b8e; --teal-soft:#e3f7f4; --amber:#d98324; --amber-soft:#fdf1e2;
+    --purple:#7b4bd6; --purple-soft:#f2ecfe; --rose:#d6455f; --rose-soft:#fdecef;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);line-height:1.7;
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px 90px;}
+
+  header{padding:60px 0 36px;border-bottom:1px solid var(--line);margin-bottom:40px;}
+  .kicker{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--accent);
+    background:var(--accent-soft);padding:5px 12px;border-radius:100px;font-weight:600;margin-bottom:18px;}
+  h1{font-size:36px;line-height:1.25;margin:0 0 14px;letter-spacing:-.02em;font-weight:700;}
+  .sub{font-size:16px;color:var(--ink2);max-width:780px;margin:0 0 26px;}
+
+  .profile{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px;}
+  .pf{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;}
+  .pf .k{font-size:12px;color:var(--ink3);letter-spacing:.06em;margin-bottom:5px;}
+  .pf .v{font-size:15.5px;font-weight:650;}
+
+  section{margin-bottom:52px;}
+  h2{font-size:23px;margin:0 0 6px;letter-spacing:-.01em;font-weight:700;display:flex;align-items:center;gap:12px;}
+  h2 .idx{font-size:12px;font-weight:700;color:#fff;background:var(--ink);width:26px;height:26px;
+    border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .lead{color:var(--ink2);font-size:14.5px;margin:0 0 22px;padding-left:38px;}
+  h3{font-size:16px;margin:26px 0 12px;font-weight:650;}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin-bottom:16px;}
+  .card.tight{padding:20px 22px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  th{text-align:left;font-weight:600;color:var(--ink3);font-size:12px;letter-spacing:.05em;
+    padding:0 12px 10px 0;border-bottom:1px solid var(--line);white-space:nowrap;}
+  td{padding:12px 12px 12px 0;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink2);}
+  tr:last-child td{border-bottom:none;}
+  td strong{color:var(--ink);font-weight:600;}
+  .nowrap{white-space:nowrap;}
+
+  .tag{font-size:11px;padding:2px 8px;border-radius:100px;font-weight:600;letter-spacing:.03em;white-space:nowrap;}
+  .tag.p0{background:var(--rose-soft);color:var(--rose);}
+  .tag.p1{background:var(--amber-soft);color:var(--amber);}
+  .tag.p2{background:var(--teal-soft);color:var(--teal);}
+  .tag.gray{background:#f0f1f5;color:var(--ink3);}
+  .tag.skip{background:#eef0f4;color:#6b7280;}
+
+  /* ---------- timeline ---------- */
+  .tl{position:relative;padding-left:34px;}
+  .tl::before{content:"";position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:var(--line);}
+  .wk{position:relative;margin-bottom:16px;}
+  .wk::before{content:"";position:absolute;left:-28px;top:22px;width:11px;height:11px;border-radius:50%;
+    background:#fff;border:2.5px solid var(--accent);z-index:1;}
+  .wk.p2::before{border-color:var(--teal);}
+  .wk.p3::before{border-color:var(--amber);}
+  .wk.p4::before{border-color:var(--purple);}
+  .wk.p5::before{border-color:var(--rose);}
+  .wk-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;}
+  .wk-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:10px;}
+  .wk-when{font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);
+    padding:3px 10px;border-radius:100px;flex:0 0 auto;}
+  .wk-title{font-size:16px;font-weight:650;}
+  .wk-hrs{font-size:12px;color:var(--ink3);margin-left:auto;}
+  .wk-body{font-size:13.5px;color:var(--ink2);}
+  .wk-body .row{margin:7px 0;display:flex;gap:9px;}
+  .wk-body .row b{color:var(--ink);font-weight:600;flex:0 0 auto;min-width:56px;}
+  .wk-body .row span{flex:1;}
+  .verify{margin-top:12px;padding:11px 14px;background:var(--teal-soft);border-radius:10px;
+    font-size:13px;color:#0a6b62;}
+  .verify b{font-weight:700;}
+
+  .callout{background:var(--accent-soft);border-radius:14px;padding:18px 22px;font-size:14px;color:#22307a;margin:18px 0;}
+  .callout b{font-weight:700;}
+  .callout.warn{background:var(--amber-soft);color:#7a4a10;}
+  .callout.danger{background:var(--rose-soft);color:#8a1f33;}
+
+  ul.clean{margin:8px 0 0;padding-left:20px;font-size:13.5px;color:var(--ink2);}
+  ul.clean li{margin:4px 0;}
+
+  /* ---------- progress ---------- */
+  .prog-wrap{position:sticky;top:0;z-index:10;background:rgba(245,246,248,.94);
+    backdrop-filter:blur(8px);padding:14px 0;margin-bottom:26px;border-bottom:1px solid var(--line);}
+  .prog-inner{max-width:1080px;margin:0 auto;padding:0 28px;display:flex;align-items:center;gap:16px;}
+  .prog-bar{flex:1;height:8px;background:#e6e8ee;border-radius:100px;overflow:hidden;}
+  .prog-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--teal));
+    border-radius:100px;transition:width .25s ease;}
+  .prog-txt{font-size:13px;color:var(--ink2);font-variant-numeric:tabular-nums;white-space:nowrap;}
+
+  label.ck{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;color:var(--ink2);
+    cursor:pointer;padding:4px 0;user-select:none;}
+  label.ck input{margin:5px 0 0;flex:0 0 auto;width:15px;height:15px;accent-color:var(--accent);cursor:pointer;}
+  label.ck input:checked + span{color:var(--ink3);text-decoration:line-through;}
+
+  footer{border-top:1px solid var(--line);padding-top:22px;font-size:12.5px;color:var(--ink3);}
+  footer p{margin:4px 0;}
+
+  @media (max-width:860px){
+    .profile,.grid2,.grid3{grid-template-columns:1fr;}
+    h1{font-size:28px;}
+    .wrap{padding:0 18px 60px;}
+    .prog-inner{padding:0 18px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="prog-wrap">
+  <div class="prog-inner">
+    <span class="prog-txt">学习进度</span>
+    <div class="prog-bar"><div class="prog-fill" id="pf"></div></div>
+    <span class="prog-txt" id="pt">0 / 0</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header>
+  <span class="kicker">定制路线 · 后端转 AI Agent</span>
+  <h1>10 周转行路线：从后端开发到深圳 AI Agent 岗位</h1>
+  <p class="sub">你的起点比大多数人好得多——<strong>面试里最难补的「工程落地能力」你已经有了</strong>。所以这条路线的重点不是学编程，而是补上 AI 应用层的语义、做两个能讲 30 分钟的项目、把已有的工程能力翻译成 Agent 场景的语言。</p>
+  <div class="profile">
+    <div class="pf"><div class="k">你的起点</div><div class="v">有后端 / 全栈开发经验</div></div>
+    <div class="pf"><div class="k">你的目标</div><div class="v">尽快拿深圳 Agent 岗 offer</div></div>
+    <div class="pf"><div class="k">可投入时间</div><div class="v">10–20 小时 / 周 · 共 10 周</div></div>
+  </div>
+</header>
+
+<!-- ============ 1. 诊断 ============ -->
+<section>
+  <h2><span class="idx">1</span>先做减法：你能跳过什么</h2>
+  <p class="lead">深圳 Agent 岗位 JD 里，有相当一部分是「传统软件工程基本功」。这部分你已经有底子，<strong>不要重复学，那是纯浪费</strong>。把省下的时间全投到下面「必须补」的清单上。</p>
+
+  <div class="grid2">
+    <div class="card tight" style="margin:0;">
+      <h3 style="margin-top:0;color:var(--teal);">可以跳过 / 只复习</h3>
+      <table>
+        <tbody>
+          <tr><td>编程语言基础（Python 语法、面向对象）</td><td class="nowrap"><span class="tag skip">跳过</span></td></tr>
+          <tr><td>进程 / 线程 / 协程、并发与并行</td><td class="nowrap"><span class="tag skip">只复习</span></td></tr>
+          <tr><td>HTTP / REST / WebSocket、API 设计</td><td class="nowrap"><span class="tag skip">跳过</span></td></tr>
+          <tr><td>数据库、SQL、Redis 基础用法</td><td class="nowrap"><span class="tag skip">跳过</span></td></tr>
+          <tr><td>Linux、Git、Docker 基础</td><td class="nowrap"><span class="tag skip">跳过</span></td></tr>
+          <tr><td>微服务、消息队列、K8s 运维</td><td class="nowrap"><span class="tag skip">跳过</span></td></tr>
+          <tr><td>模型训练 / 微调 / 论文复现</td><td class="nowrap"><span class="tag skip">暂缓</span></td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12.5px;color:var(--ink3);margin:10px 0 0;">最后一条说明：JD 里「模型微调」只占约 35%，且要求 PyTorch + 训练经验，是算法岗的地盘。你用后端背景去拼这块不占优，<strong>用工程能力去拼才占优</strong>。等拿到 offer 再补不迟。</p>
+    </div>
+
+    <div class="card tight" style="margin:0;">
+      <h3 style="margin-top:0;color:var(--rose);">必须补（按优先级）</h3>
+      <table>
+        <tbody>
+          <tr><td><strong>LLM 应用语义层</strong>：Prompt 结构、Token、上下文窗口、模型差异</td><td class="nowrap"><span class="tag p0">P0</span></td></tr>
+          <tr><td><strong>RAG 全链路</strong>：切分、Embedding、向量库、混合检索、重排序</td><td class="nowrap"><span class="tag p0">P0</span></td></tr>
+          <tr><td><strong>Function Calling / Tool Use</strong>（手写一遍，不用框架）</td><td class="nowrap"><span class="tag p0">P0</span></td></tr>
+          <tr><td><strong>LangGraph 编排</strong>：状态机、条件分支、循环重试、人工介入</td><td class="nowrap"><span class="tag p0">P0</span></td></tr>
+          <tr><td><strong>MCP 协议</strong>：工具标准化封装（当前占比低，但增长最快）</td><td class="nowrap"><span class="tag p1">P1</span></td></tr>
+          <tr><td><strong>记忆系统</strong>：短期 / 长期 / 工作记忆</td><td class="nowrap"><span class="tag p1">P1</span></td></tr>
+          <tr><td><strong>评估体系</strong>：LLM-as-Judge、黄金数据集、量化指标</td><td class="nowrap"><span class="tag p1">P1</span></td></tr>
+          <tr><td><strong>可观测性</strong>：Tracing、Token 成本、延迟归因</td><td class="nowrap"><span class="tag p1">P1</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>你的核心策略：</b>别人在面试里答不上「工具调用超时怎么办」「线上内存泄漏怎么排查」「如何限流降级」——这些对你来说是日常。你要做的不是学新东西，而是<strong>把已有经验换一套 Agent 的术语讲出来</strong>，再补上 AI 应用层的语义。这是最高效的转行路径。
+  </div>
+</section>
+
+<!-- ============ 2. 时间分配 ============ -->
+<section>
+  <h2><span class="idx">2</span>每周 15 小时怎么花</h2>
+  <p class="lead">在职学习最大的敌人不是难度，是「只看不写」。所以时间分配要强制偏向动手。</p>
+  <div class="grid3">
+    <div class="card tight" style="margin:0;text-align:center;">
+      <div style="font-size:30px;font-weight:700;color:var(--accent);">4h</div>
+      <div style="font-size:13px;color:var(--ink2);margin-top:4px;">看文档 / 教程<br><span style="color:var(--ink3);font-size:12px;">只学当周要用的，不囤课</span></div>
+    </div>
+    <div class="card tight" style="margin:0;text-align:center;">
+      <div style="font-size:30px;font-weight:700;color:var(--teal);">9h</div>
+      <div style="font-size:13px;color:var(--ink2);margin-top:4px;">动手写代码<br><span style="color:var(--ink3);font-size:12px;">当周项目推进 + 踩坑</span></div>
+    </div>
+    <div class="card tight" style="margin:0;text-align:center;">
+      <div style="font-size:30px;font-weight:700;color:var(--amber);">2h</div>
+      <div style="font-size:13px;color:var(--ink2);margin-top:4px;">复盘 + 写笔记<br><span style="color:var(--ink3);font-size:12px;">沉淀成可讲的故事和博客</span></div>
+    </div>
+  </div>
+  <div class="callout warn">
+    <b>一条铁律：</b>每周末必须能跑起来一个「能演示的东西」。跑不起来就不进下一周。在职学习最容易死在「学了三个月，手里没有一个能拿出手的项目」。
+  </div>
+</section>
+
+<!-- ============ 3. 十周计划 ============ -->
+<section>
+  <h2><span class="idx">3</span>10 周逐周计划</h2>
+  <p class="lead">勾选左侧方框可以记录进度（会自动保存在本地）。</p>
+
+  <div class="tl">
+
+    <!-- W1 -->
+    <div class="wk">
+      <div class="wk-card">
+        <div class="wk-head">
+          <span class="wk-when">第 1 周</span>
+          <span class="wk-title">LLM 应用语义层 + 手写 Function Calling</span>
+          <span class="wk-hrs">约 15h</span>
+        </div>
+        <div class="wk-body">
+          <div class="row"><b>学什么</b><span>Prompt 结构（System / Few-shot / CoT）、Token 与上下文窗口、主流模型差异（GPT-4o 通用稳、Claude 长文本推理强、DeepSeek / Qwen / GLM 中文性价比高）。<strong>重点：不用任何框架</strong>，用原生 API 手写一遍工具调用循环。</span></div>
+          <div class="row"><b>动手做</b><span>一个命令行小助手：能根据用户问题自主决定调用「查天气 / 算数 / 读本地文件」三个工具，并把结果组织成回答。全程手写 JSON Schema 和调用循环。</span></div>
+          <div class="row"><b>为什么</b><span>手写一遍，你才会真正理解「框架到底替你做了什么」。面试问「Function Calling 的原理」「工具调用失败怎么处理」，你能从底层答。</span></div>
+        </div>
+        <div class="verify">
+          <b>验收标准：</b>能画出一次完整的工具调用时序图（模型返回 tool_calls → 你执行 → 回填结果 → 模型生成最终答案），并说清 token 是怎么消耗的。
+        </div>
+      </div>
+    </div>
+
+    <!-- W2-3 -->
+    <div class="wk p2">
+      <div class="wk-card">
+        <div class="wk-head">
+          <span class="wk-when">第 2–3 周</span>
+          <span class="wk-title">RAG 全链路 + 建评估体系</span>
+          <span class="wk-hrs">约 30h</span>
+        </div>
+        <div class="wk-body">
+          <div class="row"><b>学什么</b><span>文档切分策略（固定长度 / 递归 / 语义）、Embedding 模型选型、向量库（先用 <strong>Qdrant</strong> 或 Chroma）、相似度检索、<strong>混合检索</strong>（BM25 + 向量）、重排序（BGE-reranker）、长上下文 vs RAG 的取舍边界。</span></div>
+          <div class="row"><b>动手做</b><span>企业知识库问答系统。关键不是跑通，而是<strong>做实验</strong>：Chunk 大小取 256 / 512 / 1024，重叠取 0 / 50 / 100，跑 20 条测试问题，记录 Recall@K 和 MRR，做出对比表格。</span></div>
+          <div class="row"><b>为什么</b><span>面试官必问「Chunk 大小怎么定的」——答「官方默认值」就出局，答「我做过三组对比实验，512 + 重叠 50 在 Recall@5 上最优」就赢了。<strong>这张实验表格是你第一个能拿出手的面试素材。</strong></span></div>
+        </div>
+        <div class="verify">
+          <b>验收标准：</b>手里有一张 Chunk 参数对比实验表（含 Recall@K / MRR 数据），并能解释为什么重排序能提升效果。
+        </div>
+      </div>
+    </div>
+
+    <!-- W4-5 -->
+    <div class="wk p3">
+      <div class="wk-card">
+        <div class="wk-head">
+          <span class="wk-when">第 4–5 周</span>
+          <span class="wk-title">Agent 编排：LangChain 入门 → LangGraph 落地</span>
+          <span class="wk-hrs">约 30h</span>
+        </div>
+        <div class="wk-body">
+          <div class="row"><b>学什么</b><span>LangChain 核心概念（Chain / Agent / Memory / Tool）快速过一遍，<strong>然后主力投入 LangGraph</strong>：图状态机、状态持久化（checkpointer）、条件分支、循环重试、Human-in-the-Loop（interrupt_before）。理解 ReAct 与 Plan-and-Execute 的适用边界。</span></div>
+          <div class="row"><b>动手做</b><span>把第 2–3 周的 RAG 升级成 Agent：能自主决定「查知识库 / 调外部 API / 做计算 / 反问用户」。用 LangGraph 画出状态图，加一条失败重试路径。</span></div>
+          <div class="row"><b>加餐</b><span>把其中一个工具封装成 <strong>MCP Server</strong>（约 4 小时工作量）。JD 里 MCP 只占 10%，但 2026 年它是工具调用的事实标准，成本低、面试谈资高。</span></div>
+        </div>
+        <div class="verify">
+          <b>验收标准：</b>能讲清「为什么这个场景用 LangGraph 而不是普通 Chain」「为什么用多 Agent / 不用会怎样」「工具调用超时和返回脏数据怎么兜底」。
+        </div>
+      </div>
+    </div>
+
+    <!-- W6-7 -->
+    <div class="wk p4">
+      <div class="wk-card">
+        <div class="wk-head">
+          <span class="wk-when">第 6–7 周</span>
+          <span class="wk-title">生产化 + 评估 + 记忆系统（你的主场）</span>
+          <span class="wk-hrs">约 30h</span>
+        </div>
+        <div class="wk-body">
+          <div class="row"><b>学什么</b><span>FastAPI 服务化与异步、限流、降级、重试、熔断；<strong>可观测性</strong>（LangSmith 或 Langfuse：Tracing、Token 成本、延迟归因）；<strong>评估</strong>（黄金数据集 + LLM-as-Judge，指标：任务完成率、无效工具调用率、幻觉率、Token 消耗）；<strong>记忆三层</strong>（短期 / 长期 / 工作记忆）。</span></div>
+          <div class="row"><b>动手做</b><span>把第 4–5 周的 Agent 做成生产级服务：加并发处理、加限流降级、加完整 Tracing、加自动化评测 Pipeline（能一键跑出准确率和成本报告）。</span></div>
+          <div class="row"><b>为什么</b><span>这一周是你<strong>相对别人最大的优势区</strong>。后端经验让你做这些又快又稳，而大多数转行者在这里是空白。把这一块做成可讲的「生产故事」，面试分差就拉开了。</span></div>
+        </div>
+        <div class="verify">
+          <b>验收标准：</b>有一份自动化评测报告（准确率 / 成本 / 延迟），能演示「限流触发后的降级行为」，能说清一次线上故障的排查路径。
+        </div>
+      </div>
+    </div>
+
+    <!-- W8-9 -->
+    <div class="wk p5">
+      <div class="wk-card">
+        <div class="wk-head">
+          <span class="wk-when">第 8–9 周</span>
+          <span class="wk-title">项目二 + 作品集包装</span>
+          <span class="wk-hrs">约 30h</span>
+        </div>
+        <div class="wk-body">
+          <div class="row"><b>做什么</b><span>选<strong>一个深圳本地场景</strong>做垂直项目，形成与项目一的对比：<br>· 单 Agent + 强工程 + 明确业务（如 AI 客服、供应链查询）<br>· 多 Agent + 复杂编排（如「需求分析 → 检索 → 生成 → 自审」协作链）</span></div>
+          <div class="row"><b>包装</b><span>GitHub 仓库 + 清晰 README + 架构图 + <strong>量化结果</strong>（响应时间、准确率、成本下降幅度）。有技术博客加分——JD 里明确列为加分项。</span></div>
+          <div class="row"><b>注意</b><span>两个项目要能形成<strong>对比叙事</strong>：一个证明「我懂业务落地」，一个证明「我能设计复杂架构」。只有一个项目的话，面试官会怀疑是抄的。</span></div>
+        </div>
+        <div class="verify">
+          <b>验收标准：</b>不看代码，能在 30 分钟内把两个项目的架构、选型理由、踩过的坑、优化前后数据讲完。
+        </div>
+      </div>
+    </div>
+
+    <!-- W10 -->
+    <div class="wk p5">
+      <div class="wk-card">
+        <div class="wk-head">
+          <span class="wk-when">第 10 周</span>
+          <span class="wk-title">面试冲刺 + 批量投递</span>
+          <span class="wk-hrs">约 15h</span>
+        </div>
+        <div class="wk-body">
+          <div class="row"><b>手写算法</b><span>LRU Cache（O(1)）、TopK 小根堆、扁平 JSON 还原树、二叉树锯齿层序遍历。大厂一面/二面高频。</span></div>
+          <div class="row"><b>八股</b><span>Token 划分原理、Self-Attention 与 QKV、Lost in the Middle、上下文窗口是否越大越好、超长对话处理方案、SFT / PPO / DPO / GRPO 差异、mmap / writev。</span></div>
+          <div class="row"><b>投递</b><span>BOSS 直聘（直聊，主战场）+ 猎聘（中高端）+ 牛客（校招）。深圳优先南山、福田、龙岗坂田。先用 2–3 家非目标公司练手，再投心仪的。</span></div>
+        </div>
+        <div class="verify">
+          <b>验收标准：</b>能白板手写 LRU Cache 和小根堆；项目答辩能扛住连续 5 层追问不卡壳。
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ 4. 技术栈 ============ -->
+<section>
+  <h2><span class="idx">4</span>2026 年技术栈选型（别学错东西）</h2>
+  <p class="lead">今年的生态有两个重要变化，直接决定你该学什么——<strong>AutoGen 已被弃用，LangChain 退居原型定位</strong>。</p>
+
+  <div class="card">
+    <table>
+      <thead><tr><th>层次</th><th>该学什么</th><th>市场现状 / 理由</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>编排层</strong></td>
+          <td>LangChain（原型）→ <strong>LangGraph（生产）</strong></td>
+          <td>LangChain 占编排层 <strong>70.6%</strong> 份额、134k stars，但独立基准显示复杂工作流下 Token 与延迟高于 LangGraph。策略是「LangChain 做发现层，生产迁 LangGraph」。</td>
+        </tr>
+        <tr>
+          <td><strong>工具协议</strong></td>
+          <td><strong>MCP</strong></td>
+          <td>工具调用事实标准，GitHub 相关仓库 1700+，81.1% 应用用官方 SDK。2026 年 7 月最大更新是<strong>无状态化</strong>（取消 Session），Server 可像普通 HTTP 服务水平扩展。</td>
+        </tr>
+        <tr>
+          <td><strong>协作协议</strong></td>
+          <td>A2A（了解即可）</td>
+          <td>Google 发起，已移交 Linux Foundation 治理，150+ 组织生产部署。解决 Agent 之间互相委派任务，与 MCP 正交。求职阶段<strong>不必深挖</strong>，知道定位就行。</td>
+        </tr>
+        <tr>
+          <td><strong>前端交互</strong></td>
+          <td>AG-UI（了解即可）</td>
+          <td>基于 SSE + JSON-RPC，解决流式输出、工具执行可视化、Agent 主动提问。做 C 端 Agent 产品时会用到。</td>
+        </tr>
+        <tr>
+          <td><strong>多 Agent 框架</strong></td>
+          <td>CrewAI，或 Microsoft Agent Framework</td>
+          <td class="nowrap"><span class="tag p0">重要变化</span> <strong>AutoGen 已进入维护模式</strong>，2025 年 10 月与 Semantic Kernel 合并为 MAF，2026 年 4 月发布 1.0 GA。新项目直接上 MAF，别再从 AutoGen 学起。</td>
+        </tr>
+        <tr>
+          <td><strong>低代码</strong></td>
+          <td>Dify / Coze（会用即可）</td>
+          <td>快速验证原型用，JD 里占 35%。但别把它当核心竞争力——面试考的是你能不能手写。</td>
+        </tr>
+        <tr>
+          <td><strong>向量库</strong></td>
+          <td>Qdrant 或 Chroma 起步</td>
+          <td>先学一个吃透原理，Milvus / Pinecone 用法大同小异，面试问的是切分与检索策略而非 API。</td>
+        </tr>
+        <tr>
+          <td><strong>可观测性</strong></td>
+          <td>LangSmith / Langfuse，OpenTelemetry</td>
+          <td>三层：日志、指标（延迟 / 吞吐 / 错误率 / Token）、链路追踪。没有 Tracing 数据，优化就是盲猜。</td>
+        </tr>
+        <tr>
+          <td><strong>评估</strong></td>
+          <td>黄金数据集 + LLM-as-Judge</td>
+          <td>指标：答案准确率、轮次、无效工具调用率、噪声工具使用率。评估标准要自己掌握，这是壁垒。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout danger">
+    <b>安全治理是个现成的加分点：</b>数据显示<strong>只有 37.2% 的 MCP 应用在工具执行前设置了人工审批关卡</strong>。你在项目里加一个工具审批 / 权限拦截层（高风险工具 require_approval），既是真实工程能力，又能在面试里讲出「AI Agent 的安全边界」——大多数候选人根本想不到这一层。
+  </div>
+</section>
+
+<!-- ============ 5. 项目设计 ============ -->
+<section>
+  <h2><span class="idx">5</span>两个项目怎么设计</h2>
+  <p class="lead">项目不在多，在于能形成对比叙事。下面两个方向，一个证明落地、一个证明架构。</p>
+
+  <div class="grid2">
+    <div class="card" style="margin:0;">
+      <h3 style="margin-top:0;">项目一：单 Agent + 强工程 + 明确业务</h3>
+      <p style="font-size:13.5px;color:var(--ink2);margin:0;">选一个深圳本地场景——AI 客服、供应链查询、硬件设备问答、金融合规问答都可以。</p>
+      <ul class="clean">
+        <li>RAG 知识库 + 工具调用（查订单 / 查库存 / 调内部 API）</li>
+        <li>LangGraph 编排，含失败重试与人工介入节点</li>
+        <li>FastAPI 服务化 + 限流 + 降级 + 完整 Tracing</li>
+        <li>自动化评测 Pipeline，输出准确率 / 成本 / 延迟报告</li>
+      </ul>
+      <p style="font-size:13px;color:var(--teal);margin:12px 0 0;font-weight:600;">证明的是：我懂把 Agent 做成生产系统。</p>
+    </div>
+
+    <div class="card" style="margin:0;">
+      <h3 style="margin-top:0;">项目二：多 Agent + 复杂编排</h3>
+      <p style="font-size:13.5px;color:var(--ink2);margin:0;">设计一条协作链，例如「需求分析 Agent → 检索 Agent → 生成 Agent → 自审 Agent」，或 Supervisor 模式下的分工调度。</p>
+      <ul class="clean">
+        <li>Agent 之间的分工、任务分发、全局状态合并</li>
+        <li>输出冲突时的仲裁机制（谁说了算 / 何时转人工）</li>
+        <li>防死循环：最大轮次、状态去重、终止条件</li>
+        <li>每个子 Agent 的能力用 MCP 工具封装</li>
+      </ul>
+      <p style="font-size:13px;color:var(--purple);margin:12px 0 0;font-weight:600;">证明的是：我能设计复杂架构，而不只是调框架。</p>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <b>关于「玩具项目」的界定：</b>面试官区分玩具和生产级，看的是三件事——<strong>有没有异常处理、有没有容错降级、有没有效果评估</strong>。你的两个项目必须同时具备这三样，否则和教程里抄的没区别。
+  </div>
+</section>
+
+<!-- ============ 6. 面试考点 ============ -->
+<section>
+  <h2><span class="idx">6</span>面试考点清单</h2>
+  <p class="lead">来自大厂 AI Agent 岗位真实面经。带 ⚑ 的是你作为后端可以直接拿分的题。</p>
+
+  <div class="grid2">
+    <div class="card tight" style="margin:0;">
+      <h3 style="margin-top:0;">一面：项目深挖 + RAG + 工程基础</h3>
+      <ul class="clean">
+        <li>完整讲一遍项目流程与你负责的模块</li>
+        <li>RAG 离线建库 / 在线检索分别做了什么</li>
+        <li>Chunk 大小与重叠窗口的确定依据</li>
+        <li>用 Recall@K、MRR 做过调优实验吗</li>
+        <li>Agent 工具调用成功率如何定义与提升</li>
+        <li>工具超时 / 脏数据 / 重复执行怎么兜底 ⚑</li>
+        <li>进程、线程、协程的区别与适用场景 ⚑</li>
+        <li>并发与并行的区别 ⚑</li>
+        <li>隐私数据的传输 / 存储 / 访问安全 ⚑</li>
+        <li><strong>手写：LRU Cache（O(1)）</strong></li>
+      </ul>
+    </div>
+    <div class="card tight" style="margin:0;">
+      <h3 style="margin-top:0;">二面：架构 + 模型原理 + 系统能力</h3>
+      <ul class="clean">
+        <li>Agent 对比传统工作流的优势与生产难题</li>
+        <li>Token 划分原理、为什么以 Token 为单元</li>
+        <li>Transformer / Self-Attention，Q、K、V 的作用</li>
+        <li>Lost in the Middle；上下文窗口越大越好吗</li>
+        <li>超长对话：滑动窗口 / 摘要 / 向量召回怎么选</li>
+        <li>SFT 流程，PPO / DPO / GRPO 的差异</li>
+        <li>为什么用多 Agent，冲突如何仲裁</li>
+        <li>线上 CPU 飙高 / 内存持续上涨怎么排查 ⚑</li>
+        <li>mmap 是什么、解决什么问题 ⚑</li>
+        <li>writev 如何聚合缓冲区减少系统调用 ⚑</li>
+        <li><strong>手写：扁平 JSON 还原树 / 二叉树锯齿层序遍历</strong></li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout">
+    <b>⚑ 标记的题就是你的护城河。</b>转行者通常在这些题上失分，而你有真实经验。面试时主动把话题往「生产环境的异常处理」上引，让面试官在你的优势区提问。
+  </div>
+</section>
+
+<!-- ============ 7. 避坑 ============ -->
+<section>
+  <h2><span class="idx">7</span>避坑清单</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>坑</th><th>正确做法</th></tr></thead>
+      <tbody>
+        <tr><td>囤课不看，教程收藏了几十 G</td><td>只学当周要用的，文档优先于视频。跑不起来就不进下一周</td></tr>
+        <tr><td>一上来就用 Dify / Coze 搭，跳过原理</td><td>先用原生 API 手写 Function Calling，再上框架。否则面试问原理就露馅</td></tr>
+        <tr><td>花大量时间学模型微调 / 训练</td><td>JD 只占 35% 且是算法岗地盘，不占优。拿到 offer 后再补</td></tr>
+        <tr><td>从 AutoGen 开始学多 Agent</td><td>AutoGen 已进入维护模式，新项目用 Microsoft Agent Framework 或 CrewAI</td></tr>
+        <tr><td>项目做完不留量化数据</td><td>从第一天就记录：准确率、延迟、Token 成本、优化前后对比</td></tr>
+        <tr><td>只做一个项目</td><td>两个项目形成对比叙事，否则面试官怀疑是抄的</td></tr>
+        <tr><td>不用 Tracing 工具，靠 print 调试</td><td>上 LangSmith / Langfuse，链路追踪是生产级的基本标志</td></tr>
+        <tr><td>只依赖单一模型厂商</td><td>做模型无关化封装 + 故障转移，JD 里明确要求</td></tr>
+        <tr><td>忽略工具执行安全</td><td>加审批关卡（高风险工具 require_approval）。仅 37.2% 的应用做了这件事，是差异化加分点</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 8. 资源 ============ -->
+<section>
+  <h2><span class="idx">8</span>学习资源优先级</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>优先级</th><th>资源</th><th>怎么用</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag p0">最高</span></td><td>官方文档（LangGraph、MCP、FastAPI、Qdrant）</td><td>一手信息，比任何二手教程都准。当周用到什么查什么</td></tr>
+        <tr><td><span class="tag p0">最高</span></td><td>GitHub 上的开源 Agent 项目源码</td><td>读别人怎么组织状态图、怎么做重试和降级。比教程有用十倍</td></tr>
+        <tr><td><span class="tag p1">高</span></td><td>牛客网 / 掘金上的真实面经</td><td>反推考点，针对性补。每周刷 3–5 篇深圳 Agent 岗面经</td></tr>
+        <tr><td><span class="tag p1">高</span></td><td>BOSS 直聘 JD 原文</td><td>每周看 10 条深圳在招 JD，把不认识的词记下来逐个击破</td></tr>
+        <tr><td><span class="tag p2">中</span></td><td>技术博客 / 公众号文章</td><td>用来快速建立框架认知，但注意时效性，以官方文档为准</td></tr>
+        <tr><td><span class="tag skip">低</span></td><td>体系化的付费视频课</td><td>容易变成「看完了但写不出来」。真要买，只买带实战项目的</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 9. 验收 ============ -->
+<section>
+  <h2><span class="idx">9</span>出关验收：满足这几条就可以投了</h2>
+  <div class="card">
+    <label class="ck"><input type="checkbox" class="ck"><span>能不看资料手写一次完整的 Function Calling 调用循环</span></label>
+    <label class="ck"><input type="checkbox" class="ck"><span>手里有一张 RAG 切分参数对比实验表（含 Recall@K / MRR 数据）</span></label>
+    <label class="ck"><input type="checkbox" class="ck"><span>能用 LangGraph 画出项目状态图，并解释每个分支和重试路径的设计理由</span></label>
+    <label class="ck"><input type="checkbox" class="ck"><span>项目有完整的限流、降级、重试机制，能演示触发后的行为</span></label>
+    <label class="ck"><input type="checkbox" class="ck"><span>有自动化评测报告，能报出准确率、延迟、Token 成本三个数字</span></label>
+    <label class="ck"><input type="checkbox" class="ck"><span>两个项目都已上传 GitHub，README 含架构图和量化结果</span></label>
+    <label class="ck"><input type="checkbox" class="ck"><span>不看代码能在 30 分钟内讲完两个项目的架构、选型、踩坑、优化</span></label>
+    <label class="ck"><input type="checkbox" class="ck"><span>能白板手写 LRU Cache 和 TopK 小根堆</span></label>
+    <label class="ck"><input type="checkbox" class="ck"><span>能回答「Token 划分原理」「Lost in the Middle」「上下文窗口越大越好吗」</span></label>
+    <label class="ck"><input type="checkbox" class="ck"><span>已在 BOSS 直聘上收藏了 20 个深圳目标岗位，并按片区分类</span></label>
+  </div>
+  <div class="callout">
+    <b>关于时间预期：</b>10 周是「每周稳定 15 小时」的节奏。如果某几周被工作打断，就顺延，别压缩动手时间。真实的门槛不是学完这些知识，而是<strong>手里有没有两个能扛住 5 层追问的项目</strong>。
+  </div>
+</section>
+
+<footer>
+  <p><b>路线依据：</b>基于深圳 790+ 在招 Agent 岗位的能力要求统计、50 份真实 JD 词频分析、大厂 AI Agent 岗位真实面经，以及 2026 年最新工具链生态数据（LangChain 编排层 70.6% 份额、MCP 工具调用事实标准、AutoGen 并入 Microsoft Agent Framework）。</p>
+  <p><b>说明：</b>技术生态迭代快，建议每两周回看一次官方文档确认选型未变。薪资与岗位要求以招聘平台实时信息为准。</p>
+  <p>生成时间：2026-10-08</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('input.ck'));
+  var fill = document.getElementById('pf');
+  var txt  = document.getElementById('pt');
+  var KEY  = 'agent-roadmap-progress-v1';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e) { saved = {}; }
+
+  function render(){
+    var done = 0;
+    boxes.forEach(function(b, i){
+      if (b.checked) done++;
+    });
+    var pct = boxes.length ? Math.round(done / boxes.length * 100) : 0;
+    if (fill) fill.style.width = pct + '%';
+    if (txt) txt.textContent = done + ' / ' + boxes.length;
+  }
+
+  boxes.forEach(function(b, i){
+    if (saved['b' + i]) b.checked = true;
+    b.addEventListener('change', function(){
+      saved['b' + i] = b.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch(e) {}
+      render();
+    });
+  });
+  render();
+})();
+</script>
+
+</body>
+</html>

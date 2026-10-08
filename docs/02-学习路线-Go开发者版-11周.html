@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent 转行学习路线 · Go 开发者版 · 11 周</title>
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#ffffff; --ink:#16181d; --ink2:#4a4f5a; --ink3:#868c99;
+    --line:#e6e8ee; --accent:#3557d6; --accent-soft:#eaefff;
+    --teal:#0f9b8e; --teal-soft:#e3f7f4; --amber:#d98324; --amber-soft:#fdf1e2;
+    --purple:#7b4bd6; --purple-soft:#f2ecfe; --rose:#d6455f; --rose-soft:#fdecef;
+    --go:#00a6d6; --go-soft:#e2f6fc;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);line-height:1.7;
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px 90px;}
+
+  header{padding:60px 0 36px;border-bottom:1px solid var(--line);margin-bottom:40px;}
+  .kicker{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--accent);
+    background:var(--accent-soft);padding:5px 12px;border-radius:100px;font-weight:600;margin-bottom:18px;}
+  h1{font-size:36px;line-height:1.25;margin:0 0 14px;letter-spacing:-.02em;font-weight:700;}
+  .sub{font-size:16px;color:var(--ink2);max-width:790px;margin:0 0 26px;}
+
+  .profile{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px;}
+  .pf{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;}
+  .pf .k{font-size:12px;color:var(--ink3);letter-spacing:.06em;margin-bottom:5px;}
+  .pf .v{font-size:15.5px;font-weight:650;}
+
+  section{margin-bottom:52px;}
+  h2{font-size:23px;margin:0 0 6px;letter-spacing:-.01em;font-weight:700;display:flex;align-items:center;gap:12px;}
+  h2 .idx{font-size:12px;font-weight:700;color:#fff;background:var(--ink);width:26px;height:26px;
+    border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .lead{color:var(--ink2);font-size:14.5px;margin:0 0 22px;padding-left:38px;}
+  h3{font-size:16px;margin:26px 0 12px;font-weight:650;}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin-bottom:16px;}
+  .card.tight{padding:20px 22px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  th{text-align:left;font-weight:600;color:var(--ink3);font-size:12px;letter-spacing:.05em;
+    padding:0 12px 10px 0;border-bottom:1px solid var(--line);white-space:nowrap;}
+  td{padding:12px 12px 12px 0;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink2);}
+  tr:last-child td{border-bottom:none;}
+  td strong{color:var(--ink);font-weight:600;}
+  .nowrap{white-space:nowrap;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+    background:#f0f1f5;padding:1.5px 6px;border-radius:5px;color:#2b3a55;}
+
+  .tag{font-size:11px;padding:2px 8px;border-radius:100px;font-weight:600;letter-spacing:.03em;white-space:nowrap;}
+  .tag.p0{background:var(--rose-soft);color:var(--rose);}
+  .tag.p1{background:var(--amber-soft);color:var(--amber);}
+  .tag.p2{background:var(--teal-soft);color:var(--teal);}
+  .tag.go{background:var(--go-soft);color:#0b7fa3;}
+  .tag.skip{background:#eef0f4;color:#6b7280;}
+
+  .tl{position:relative;padding-left:34px;}
+  .tl::before{content:"";position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:var(--line);}
+  .wk{position:relative;margin-bottom:16px;}
+  .wk::before{content:"";position:absolute;left:-28px;top:22px;width:11px;height:11px;border-radius:50%;
+    background:#fff;border:2.5px solid var(--accent);z-index:1;}
+  .wk.py::before{border-color:var(--go);}
+  .wk.p2::before{border-color:var(--teal);}
+  .wk.p3::before{border-color:var(--amber);}
+  .wk.p4::before{border-color:var(--purple);}
+  .wk.p5::before{border-color:var(--rose);}
+  .wk-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;}
+  .wk-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:10px;}
+  .wk-when{font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);
+    padding:3px 10px;border-radius:100px;flex:0 0 auto;}
+  .wk-when.py{color:#0b7fa3;background:var(--go-soft);}
+  .wk-title{font-size:16px;font-weight:650;}
+  .wk-hrs{font-size:12px;color:var(--ink3);margin-left:auto;}
+  .wk-body{font-size:13.5px;color:var(--ink2);}
+  .wk-body .row{margin:7px 0;display:flex;gap:9px;}
+  .wk-body .row b{color:var(--ink);font-weight:600;flex:0 0 auto;min-width:56px;}
+  .wk-body .row span{flex:1;}
+  .verify{margin-top:12px;padding:11px 14px;background:var(--teal-soft);border-radius:10px;
+    font-size:13px;color:#0a6b62;}
+  .verify b{font-weight:700;}
+
+  .callout{background:var(--accent-soft);border-radius:14px;padding:18px 22px;font-size:14px;color:#22307a;margin:18px 0;}
+  .callout b{font-weight:700;}
+  .callout.warn{background:var(--amber-soft);color:#7a4a10;}
+  .callout.danger{background:var(--rose-soft);color:#8a1f33;}
+  .callout.go{background:var(--go-soft);color:#08536b;}
+
+  ul.clean{margin:8px 0 0;padding-left:20px;font-size:13.5px;color:var(--ink2);}
+  ul.clean li{margin:4px 0;}
+
+  .prog-wrap{position:sticky;top:0;z-index:10;background:rgba(245,246,248,.94);
+    backdrop-filter:blur(8px);padding:14px 0;margin-bottom:26px;border-bottom:1px solid var(--line);}
+  .prog-inner{max-width:1080px;margin:0 auto;padding:0 28px;display:flex;align-items:center;gap:16px;}
+  .prog-bar{flex:1;height:8px;background:#e6e8ee;border-radius:100px;overflow:hidden;}
+  .prog-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--teal));
+    border-radius:100px;transition:width .25s ease;}
+  .prog-txt{font-size:13px;color:var(--ink2);font-variant-numeric:tabular-nums;white-space:nowrap;}
+
+  label.ck{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;color:var(--ink2);
+    cursor:pointer;padding:4px 0;user-select:none;}
+  label.ck input{margin:5px 0 0;flex:0 0 auto;width:15px;height:15px;accent-color:var(--accent);cursor:pointer;}
+  label.ck input:checked + span{color:var(--ink3);text-decoration:line-through;}
+
+  footer{border-top:1px solid var(--line);padding-top:22px;font-size:12.5px;color:var(--ink3);}
+  footer p{margin:4px 0;}
+
+  @media (max-width:860px){
+    .profile,.grid2,.grid3{grid-template-columns:1fr;}
+    h1{font-size:28px;}
+    .wrap{padding:0 18px 60px;}
+    .prog-inner{padding:0 18px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="prog-wrap">
+  <div class="prog-inner">
+    <span class="prog-txt">学习进度</span>
+    <div class="prog-bar"><div class="prog-fill" id="pf"></div></div>
+    <span class="prog-txt" id="pt">0 / 0</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header>
+  <span class="kicker">定制路线 · Go 开发者转 AI Agent</span>
+  <h1>11 周转行路线：从 Go 后端到深圳 AI Agent 岗位</h1>
+  <p class="sub">修正版。你是 Go 背景，所以有两件事必须重新定位：<strong>① Python 不能跳，但只需学「差异部分」，1 周够用；② Go 不是包袱，是你在候选人群里最稀缺的差异化武器。</strong>路线从 10 周延长到 11 周，前两周专门处理语言迁移。</p>
+  <div class="profile">
+    <div class="pf"><div class="k">你的起点</div><div class="v">Go 后端开发</div></div>
+    <div class="pf"><div class="k">你的目标</div><div class="v">尽快拿深圳 Agent 岗 offer</div></div>
+    <div class="pf"><div class="k">可投入时间</div><div class="v">10–20 小时 / 周 · 共 11 周</div></div>
+  </div>
+</header>
+
+<!-- ============ 1. 诊断 ============ -->
+<section>
+  <h2><span class="idx">1</span>先做减法：Go 背景能让你跳过什么</h2>
+  <p class="lead">你仍然能跳过大量传统软件工程内容，<strong>但 Python 从「跳过」名单里彻底移除</strong>——它是整个 AI 生态的母语，不学等于没有投递资格。</p>
+
+  <div class="grid2">
+    <div class="card tight" style="margin:0;">
+      <h3 style="margin-top:0;color:var(--teal);">可以跳过 / 只复习</h3>
+      <table>
+        <tbody>
+          <tr><td>编程通用概念（变量、循环、函数、OOP）</td><td class="nowrap"><span class="tag skip">跳过</span></td></tr>
+          <tr><td>进程 / 线程 / 协程、并发与并行<strong>的理论</strong></td><td class="nowrap"><span class="tag skip">跳过</span></td></tr>
+          <tr><td>HTTP / REST / WebSocket、API 设计</td><td class="nowrap"><span class="tag skip">跳过</span></td></tr>
+          <tr><td>数据库、SQL、Redis 概念与建模</td><td class="nowrap"><span class="tag skip">跳过</span></td></tr>
+          <tr><td>Linux、Git、Docker、K8s</td><td class="nowrap"><span class="tag skip">跳过</span></td></tr>
+          <tr><td>微服务、消息队列、可观测性<strong>的工程思路</strong></td><td class="nowrap"><span class="tag skip">跳过</span></td></tr>
+          <tr><td>模型训练 / 微调 / 论文复现</td><td class="nowrap"><span class="tag skip">暂缓</span></td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12.5px;color:var(--ink3);margin:10px 0 0;">注意区分：<strong>概念你能跳，Python 里的实现方式不能跳</strong>。比如你懂协程，但 Python 的 asyncio 和 goroutine 是两套模型，必须重学。</p>
+    </div>
+
+    <div class="card tight" style="margin:0;">
+      <h3 style="margin-top:0;color:var(--rose);">必须补（按优先级）</h3>
+      <table>
+        <tbody>
+          <tr><td><strong>Python 差异部分</strong>：asyncio、类型标注、Pydantic、惯用法、工具链</td><td class="nowrap"><span class="tag p0">P0</span></td></tr>
+          <tr><td><strong>LLM 应用语义层</strong>：Prompt 结构、Token、上下文窗口、模型差异</td><td class="nowrap"><span class="tag p0">P0</span></td></tr>
+          <tr><td><strong>RAG 全链路</strong>：切分、Embedding、向量库、混合检索、重排序</td><td class="nowrap"><span class="tag p0">P0</span></td></tr>
+          <tr><td><strong>Function Calling</strong>（手写一遍，不用框架）</td><td class="nowrap"><span class="tag p0">P0</span></td></tr>
+          <tr><td><strong>LangGraph 编排</strong>：状态机、条件分支、循环重试、人工介入</td><td class="nowrap"><span class="tag p0">P0</span></td></tr>
+          <tr><td><strong>MCP 协议</strong>：Python SDK + <strong>官方 Go SDK</strong>（你的专属通道）</td><td class="nowrap"><span class="tag p1">P1</span></td></tr>
+          <tr><td><strong>记忆系统</strong> + <strong>评估体系</strong> + <strong>可观测性</strong></td><td class="nowrap"><span class="tag p1">P1</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>你的核心策略：</b>别人在面试里答不上「限流降级」「线上内存泄漏排查」「高并发工具调用」——这些对你来说是日常。<strong>但这一切必须用 Python 表达出来，因为面试官不会用 Go 考你 Agent。</strong>所以第 1 周的任务不是学新知识，而是把已有的工程能力「翻译」成 Python + AI 生态的语言。
+  </div>
+</section>
+
+<!-- ============ 2. Go → Python 迁移地图 ============ -->
+<section>
+  <h2><span class="idx">2</span>Go → Python 迁移地图（只学差异）</h2>
+  <p class="lead">你不需要从零学 Python。下面这张表是「Go 开发者学 Python for AI」的全部重点，按踩坑危险程度排序。</p>
+
+  <div class="card">
+    <table>
+      <thead><tr><th>维度</th><th>Go 里你习惯的</th><th>Python / AI 生态里是</th><th>危险度</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>并发模型</strong></td>
+          <td><code>goroutine</code> + <code>channel</code><br>抢占式调度、真并行、多核</td>
+          <td><code>asyncio</code> 单线程事件循环、协作式调度<br>所有协程共享一个线程</td>
+          <td class="nowrap"><span class="tag p0">最高</span></td>
+        </tr>
+        <tr>
+          <td><strong>类型系统</strong></td>
+          <td>静态类型 + <code>interface</code> + struct tag<br>编译期检查</td>
+          <td>鸭子类型 + type hints（可选）+ <strong>Pydantic</strong><br>运行期校验</td>
+          <td class="nowrap"><span class="tag p0">高</span></td>
+        </tr>
+        <tr>
+          <td><strong>错误处理</strong></td>
+          <td><code>if err != nil</code> 显式返回、层层传递</td>
+          <td><code>try / except</code> 异常、可冒泡可吞掉</td>
+          <td class="nowrap"><span class="tag p0">高</span></td>
+        </tr>
+        <tr>
+          <td><strong>依赖管理</strong></td>
+          <td><code>go.mod</code> 强一致、无版本地狱</td>
+          <td><code>uv</code> / <code>pip</code> / <code>poetry</code>，<strong>依赖冲突是常态</strong></td>
+          <td class="nowrap"><span class="tag p1">中高</span></td>
+        </tr>
+        <tr>
+          <td><strong>代码质量</strong></td>
+          <td><code>gofmt</code> + <code>go vet</code> 强制统一</td>
+          <td><code>ruff</code>（格式化 + lint）+ <code>mypy</code>（可选补回静态检查）</td>
+          <td class="nowrap"><span class="tag p1">中</span></td>
+        </tr>
+        <tr>
+          <td><strong>惯用法</strong></td>
+          <td>显式 for 循环、<code>defer</code></td>
+          <td>推导式、生成器、装饰器、<code>with</code> 上下文管理器</td>
+          <td class="nowrap"><span class="tag p1">中</span></td>
+        </tr>
+        <tr>
+          <td><strong>可见性</strong></td>
+          <td>首字母大写导出，编译器强制</td>
+          <td>下划线前缀表示私有，<strong>纯约定、无强制</strong></td>
+          <td class="nowrap"><span class="tag p2">低</span></td>
+        </tr>
+        <tr>
+          <td><strong>测试</strong></td>
+          <td><code>go test</code></td>
+          <td><code>pytest</code>（思路类似，上手快）</td>
+          <td class="nowrap"><span class="tag p2">低</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>并发模型：这是最容易出线上事故的地方</h3>
+  <p style="font-size:13.5px;color:var(--ink2);margin:0 0 14px;">
+    在 Go 里，你可以放心开 1000 个 goroutine 各干各的，某个阻塞了不影响其他。在 Python 里，<strong>任何一处同步阻塞调用会卡死整个事件循环，所有并发请求一起等</strong>。而 LLM 调用恰恰是 2–30 秒的慢 IO，工具调用又常常要并行——这个坑必踩。
+  </p>
+  <div class="card tight">
+    <table>
+      <thead><tr><th>你在 Go 里的写法</th><th>Python 里必须改成</th></tr></thead>
+      <tbody>
+        <tr><td><code>time.Sleep(1 * time.Second)</code></td><td><code>await asyncio.sleep(1)</code> —— 同步 <code>time.sleep</code> 会冻结整个循环</td></tr>
+        <tr><td><code>http.Get(url)</code></td><td><code>httpx.AsyncClient</code> —— 同步 <code>requests</code> 是阻塞的，<strong>Agent 服务里绝对不能用</strong></td></tr>
+        <tr><td>并发 DB 查询</td><td><code>asyncpg</code> / <code>motor</code> 等异步驱动，同步驱动会阻塞</td></tr>
+        <tr><td><code>os.ReadFile</code></td><td><code>aiofiles</code> 异步文件 IO</td></tr>
+        <tr><td><code>errgroup.Group</code> 并发聚合</td><td><code>asyncio.gather(...)</code> —— 心智模型最接近的对应物</td></tr>
+        <tr><td><code>context.WithTimeout</code></td><td><code>asyncio.wait_for(...)</code> / <code>asyncio.timeout(...)</code></td></tr>
+        <tr><td><code>sync.Mutex</code></td><td><code>asyncio.Lock()</code>（保护临界区）</td></tr>
+        <tr><td>CPU 密集用 goroutine</td><td>Python 有 <strong>GIL</strong>，多线程不能并行 CPU；用多进程，或干脆用 Go 写这一层</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Pydantic：Go 开发者会喜欢的部分</h3>
+  <p style="font-size:13.5px;color:var(--ink2);margin:0 0 12px;">
+    Python 生态里，<strong>Pydantic 的地位相当于 Go 的 struct tag + 校验库</strong>。更重要的是——它直接决定了 LLM 的 structured output 和 tool schema 怎么定义。你定义的工具参数、模型返回的结构化结果，本质都是 Pydantic 模型。这是 Go 背景最容易上手的部分，因为心智模型几乎一致。
+  </p>
+  <div class="callout go">
+    <b>迁移期最大的心理落差：</b>你会强烈想念编译期检查。补救办法——全程开 <code>type hints</code> + <code>mypy</code> + <code>ruff</code>，把 Python 当「半静态语言」写。这既是自保，也是面试加分项（说明你工程规范意识强）。
+  </div>
+</section>
+
+<!-- ============ 3. 时间分配 ============ -->
+<section>
+  <h2><span class="idx">3</span>每周 15 小时怎么花</h2>
+  <div class="grid3">
+    <div class="card tight" style="margin:0;text-align:center;">
+      <div style="font-size:30px;font-weight:700;color:var(--accent);">4h</div>
+      <div style="font-size:13px;color:var(--ink2);margin-top:4px;">看文档 / 教程<br><span style="color:var(--ink3);font-size:12px;">只学当周要用的，不囤课</span></div>
+    </div>
+    <div class="card tight" style="margin:0;text-align:center;">
+      <div style="font-size:30px;font-weight:700;color:var(--teal);">9h</div>
+      <div style="font-size:13px;color:var(--ink2);margin-top:4px;">动手写代码<br><span style="color:var(--ink3);font-size:12px;">当周项目推进 + 踩坑</span></div>
+    </div>
+    <div class="card tight" style="margin:0;text-align:center;">
+      <div style="font-size:30px;font-weight:700;color:var(--amber);">2h</div>
+      <div style="font-size:13px;color:var(--ink2);margin-top:4px;">复盘 + 写笔记<br><span style="color:var(--ink3);font-size:12px;">沉淀成可讲的故事和博客</span></div>
+    </div>
+  </div>
+  <div class="callout warn">
+    <b>第 1 周的特殊规则：</b>不要「先系统学完 Python 再开始做 AI」。正确的做法是<strong>边做边学</strong>——直接写一个调用大模型 API 的 Python 脚本，在写的过程中遇到不会的语法就查。你是 Go 开发者，语法层面的学习成本很低，卡住你的只会是「Python 特有的表达方式」，那些在做中学最快。
+  </div>
+</section>
+
+<!-- ============ 4. 11 周计划 ============ -->
+<section>
+  <h2><span class="idx">4</span>11 周逐周计划</h2>
+  <p class="lead">勾选左侧方框可以记录进度（自动保存在本地）。</p>
+
+  <div class="tl">
+
+    <!-- W1 -->
+    <div class="wk py">
+      <div class="wk-card">
+        <div class="wk-head">
+          <span class="wk-when py">第 1 周</span>
+          <span class="wk-title">Python for AI 速成（Go 视角对照）</span>
+          <span class="wk-hrs">约 15h</span>
+        </div>
+        <div class="wk-body">
+          <div class="row"><b>环境</b><span><code>uv</code> 管依赖（比 pip 快且能锁版本，相当于 Go 的 <code>go.mod</code>）、<code>pyproject.toml</code>、<code>ruff</code> 格式化 + lint、<code>mypy</code> 静态检查、<code>pytest</code>。第一件事就把工具链配好，别用裸 pip。</span></div>
+          <div class="row"><b>语法差异</b><span>类型标注（<code>list[str]</code> / <code>Optional</code> / <code>Protocol</code>）、推导式、生成器、装饰器、<code>with</code> 上下文管理器、<code>dataclass</code> 与 <strong>Pydantic</strong> 模型。</span></div>
+          <div class="row"><b>并发（重点）</b><span>把 <code>asyncio</code> 吃透：事件循环、<code>async def</code> / <code>await</code>、<code>asyncio.gather</code>、<code>asyncio.wait_for</code>、<code>asyncio.Lock</code>。反复默念一句话：<strong>任何同步阻塞调用都会卡死整个事件循环。</strong></span></div>
+          <div class="row"><b>动手做</b><span>写一个脚本：并发调用 10 次大模型 API（用 <code>httpx.AsyncClient</code> + <code>asyncio.gather</code>），对比串行和并发的耗时。亲手感受一次「把 <code>time.sleep</code> 换成 <code>await asyncio.sleep</code> 前后并发性能的差别」。</span></div>
+        </div>
+        <div class="verify">
+          <b>验收标准：</b>能用 <code>async</code> / <code>await</code> 写一个并发抓取脚本；能说出「同步 requests 为什么会拖垮整个服务」；Pydantic 模型能定义并校验一个结构化输出。
+        </div>
+      </div>
+    </div>
+
+    <!-- W2 -->
+    <div class="wk">
+      <div class="wk-card">
+        <div class="wk-head">
+          <span class="wk-when">第 2 周</span>
+          <span class="wk-title">LLM 应用语义层 + 手写 Function Calling</span>
+          <span class="wk-hrs">约 15h</span>
+        </div>
+        <div class="wk-body">
+          <div class="row"><b>学什么</b><span>Prompt 结构（System / Few-shot / CoT）、Token 与上下文窗口、主流模型差异（GPT-4o 通用稳、Claude 长文本推理强、DeepSeek / Qwen / GLM 中文性价比高）。<strong>重点：不用任何框架</strong>，用原生 API 手写一遍工具调用循环。</span></div>
+          <div class="row"><b>动手做</b><span>一个命令行助手：能自主决定调用「查天气 / 算数 / 读本地文件」三个工具。用 Pydantic 定义工具参数 Schema，手写 JSON Schema 生成与调用循环。</span></div>
+          <div class="row"><b>为什么</b><span>手写一遍才知道「框架替你做了什么」。面试问「Function Calling 的原理」「工具调用失败怎么处理」，你能从底层答。</span></div>
+        </div>
+        <div class="verify">
+          <b>验收标准：</b>能画出完整工具调用时序图（模型返回 tool_calls → 你执行 → 回填结果 → 模型生成最终答案），并说清 Token 消耗构成。
+        </div>
+      </div>
+    </div>
+
+    <!-- W3-4 -->
+    <div class="wk p2">
+      <div class="wk-card">
+        <div class="wk-head">
+          <span class="wk-when">第 3–4 周</span>
+          <span class="wk-title">RAG 全链路 + 建评估体系</span>
+          <span class="wk-hrs">约 30h</span>
+        </div>
+        <div class="wk-body">
+          <div class="row"><b>学什么</b><span>文档切分策略（固定长度 / 递归 / 语义）、Embedding 模型选型、向量库（先用 <strong>Qdrant</strong> 或 Chroma）、相似度检索、<strong>混合检索</strong>（BM25 + 向量）、重排序（BGE-reranker）、长上下文 vs RAG 的取舍边界。</span></div>
+          <div class="row"><b>动手做</b><span>企业知识库问答系统。关键不是跑通，而是<strong>做实验</strong>：Chunk 取 256 / 512 / 1024，重叠取 0 / 50 / 100，跑 20 条测试问题，记录 Recall@K 和 MRR，做出对比表格。</span></div>
+          <div class="row"><b>为什么</b><span>面试官必问「Chunk 大小怎么定的」——答「官方默认值」就出局，答「三组对比实验，512 + 重叠 50 在 Recall@5 最优」就赢了。<strong>这张实验表是你第一个能拿出手的面试素材。</strong></span></div>
+        </div>
+        <div class="verify">
+          <b>验收标准：</b>手里有一张 Chunk 参数对比实验表（含 Recall@K / MRR 数据），并能解释重排序为什么能提升效果。
+        </div>
+      </div>
+    </div>
+
+    <!-- W5-6 -->
+    <div class="wk p3">
+      <div class="wk-card">
+        <div class="wk-head">
+          <span class="wk-when">第 5–6 周</span>
+          <span class="wk-title">Agent 编排：LangGraph + MCP（Python / Go 双通道）</span>
+          <span class="wk-hrs">约 30h</span>
+        </div>
+        <div class="wk-body">
+          <div class="row"><b>学什么</b><span>LangChain 核心概念（Chain / Agent / Memory / Tool）快速过，<strong>主力投入 LangGraph</strong>：图状态机、状态持久化（checkpointer）、条件分支、循环重试、Human-in-the-Loop（<code>interrupt_before</code>）。理解 ReAct 与 Plan-and-Execute 的适用边界。</span></div>
+          <div class="row"><b>动手做</b><span>把 RAG 升级成 Agent：能自主决定「查知识库 / 调外部 API / 做计算 / 反问用户」。用 LangGraph 画状态图，加失败重试路径。</span></div>
+          <div class="row"><b>你的专属通道</b><span>用 <strong>MCP 官方 Go SDK</strong>（<code>github.com/modelcontextprotocol/go-sdk</code>）把工具网关用 Go 写一遍，再让 Python 侧的 Agent 通过 MCP 调用它。这一条同时证明「你懂协议」和「你能跨语言设计系统」，在候选人里极罕见。</span></div>
+        </div>
+        <div class="verify">
+          <b>验收标准：</b>能讲清「为什么用 LangGraph 而不是普通 Chain」「为什么用多 Agent / 不用会怎样」「工具超时和脏数据怎么兜底」；有一个跑通的 Go 版 MCP Server。
+        </div>
+      </div>
+    </div>
+
+    <!-- W7-8 -->
+    <div class="wk p4">
+      <div class="wk-card">
+        <div class="wk-head">
+          <span class="wk-when">第 7–8 周</span>
+          <span class="wk-title">生产化 + 可观测性 + 评估 + 记忆（你的主场）</span>
+          <span class="wk-hrs">约 30h</span>
+        </div>
+        <div class="wk-body">
+          <div class="row"><b>学什么</b><span>FastAPI 服务化与异步、限流、降级、重试、熔断；<strong>可观测性</strong>（LangSmith / Langfuse：Tracing、Token 成本、延迟归因）；<strong>评估</strong>（黄金数据集 + LLM-as-Judge，指标：任务完成率、无效工具调用率、幻觉率、Token 消耗）；<strong>记忆三层</strong>（短期 / 长期 / 工作记忆）。</span></div>
+          <div class="row"><b>动手做</b><span>把 Agent 做成生产级服务：加并发处理、限流降级、完整 Tracing、自动化评测 Pipeline（一键跑出准确率和成本报告）。</span></div>
+          <div class="row"><b>为什么</b><span>这一周是你<strong>相对别人最大的优势区</strong>。Go 背景让你做这些又快又稳，而多数转行者在这里是空白。把这块做成可讲的「生产故事」，面试分差就拉开了。</span></div>
+        </div>
+        <div class="verify">
+          <b>验收标准：</b>有自动化评测报告（准确率 / 成本 / 延迟），能演示「限流触发后的降级行为」，能说清一次线上故障的完整排查路径。
+        </div>
+      </div>
+    </div>
+
+    <!-- W9-10 -->
+    <div class="wk p5">
+      <div class="wk-card">
+        <div class="wk-head">
+          <span class="wk-when">第 9–10 周</span>
+          <span class="wk-title">项目二 + 作品集包装</span>
+          <span class="wk-hrs">约 30h</span>
+        </div>
+        <div class="wk-body">
+          <div class="row"><b>做什么</b><span>选<strong>一个深圳本地场景</strong>做垂直项目，与项目一形成对比：<br>· 单 Agent + 强工程 + 明确业务（AI 客服、供应链查询等）<br>· 多 Agent + 复杂编排（「需求分析 → 检索 → 生成 → 自审」协作链）</span></div>
+          <div class="row"><b>双栈包装</b><span>在 README 里明确画出<strong>语言分工</strong>：Python 负责 Agent 应用层，Go 负责高并发工具网关 / 推理路由，两者通过 MCP 协议打通。这是你最独特的技术叙事。</span></div>
+          <div class="row"><b>包装</b><span>GitHub 仓库 + 清晰 README + 架构图 + <strong>量化结果</strong>（响应时间、准确率、成本下降幅度）。有技术博客加分——JD 明确列为加分项。</span></div>
+        </div>
+        <div class="verify">
+          <b>验收标准：</b>不看代码，能在 30 分钟内把两个项目的架构、选型理由、踩过的坑、优化前后数据讲完。
+        </div>
+      </div>
+    </div>
+
+    <!-- W11 -->
+    <div class="wk p5">
+      <div class="wk-card">
+        <div class="wk-head">
+          <span class="wk-when">第 11 周</span>
+          <span class="wk-title">面试冲刺 + 批量投递</span>
+          <span class="wk-hrs">约 15h</span>
+        </div>
+        <div class="wk-body">
+          <div class="row"><b>手写算法</b><span>LRU Cache（O(1)）、TopK 小根堆、扁平 JSON 还原树、二叉树锯齿层序遍历。大厂一面 / 二面高频。</span></div>
+          <div class="row"><b>八股</b><span>Token 划分原理、Self-Attention 与 QKV、Lost in the Middle、上下文窗口是否越大越好、超长对话处理方案、SFT / PPO / DPO / GRPO 差异、mmap / writev。<strong>外加 Python 并发模型（asyncio vs 多线程 vs 多进程 vs GIL）。</strong></span></div>
+          <div class="row"><b>投递</b><span>BOSS 直聘（直聊，主战场）+ 猎聘（中高端）+ 牛客（校招）。深圳优先南山、福田、龙岗坂田。<strong>同时搜「Go + AI」「Agent 平台 / 网关」类岗位</strong>——你的双栈在这类岗位上溢价明显。</span></div>
+        </div>
+        <div class="verify">
+          <b>验收标准：</b>能白板手写 LRU Cache 和小根堆；项目答辩能扛住连续 5 层追问不卡壳。
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ 5. Go 是武器 ============ -->
+<section>
+  <h2><span class="idx">5</span>Go 不是包袱，是你的差异化武器</h2>
+  <p class="lead">Python 是 Agent 应用层的主流，但 Agent 的<strong>基础设施层</strong>正在被 Go 吃掉。这个交界处，就是你溢价的地方。</p>
+
+  <div class="grid2">
+    <div class="card" style="margin:0;">
+      <h3 style="margin-top:0;">你已经有的三张牌</h3>
+      <ul class="clean">
+        <li><strong>MCP 官方 Go SDK</strong>：<code>github.com/modelcontextprotocol/go-sdk</code>，官方维护，配套文档 <code>go.sdk.modelcontextprotocol.io</code>。你可以在几乎没人竞争的位置做工具网关。</li>
+        <li><strong>高并发工具执行层</strong>：Agent 并行调 10 个工具时，Python 受 GIL 和事件循环限制，Go 的 goroutine 天然占优。同等算力下资源占用明显更低。</li>
+        <li><strong>生产工程素养</strong>：限流、降级、熔断、链路追踪、优雅关闭——这些是 Go 后端的基本功，多数 AI 转行者不具备。</li>
+      </ul>
+    </div>
+    <div class="card" style="margin:0;">
+      <h3 style="margin-top:0;">三个真实的切入点</h3>
+      <ul class="clean">
+        <li><strong>Agent 网关 / 模型路由</strong>：多模型故障转移、配额与成本管控、请求聚合。高并发 + 低延迟场景，Go 是合理选择。</li>
+        <li><strong>工具执行集群</strong>：把企业内部系统封装成 MCP Server 集群，用 Go 写，供 Python Agent 调用。</li>
+        <li><strong>深圳的 Go 技术栈岗位</strong>：部分大厂与平台型公司（如字节火山引擎、腾讯后台、金蝶平台层）的 Agent 基础设施栈含 Go，这类岗位对你几乎无竞争。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout go">
+    <b>简历上的一句话叙事：</b>「用 Python 构建 Agent 应用层，用 Go 构建高并发工具网关与模型路由层，通过 MCP 协议打通，兼顾开发效率与运行时性能。」——这句话在深圳 Agent 岗位的候选人里，属于极少数派。既回应了「你会不会 Python」的质疑，又展示了别人没有的系统设计能力。
+  </div>
+</section>
+
+<!-- ============ 6. 技术栈 ============ -->
+<section>
+  <h2><span class="idx">6</span>2026 年技术栈选型（别学错东西）</h2>
+  <p class="lead">今年的生态有两个重要变化——<strong>AutoGen 已被弃用，LangChain 退居原型定位</strong>。</p>
+
+  <div class="card">
+    <table>
+      <thead><tr><th>层次</th><th>该学什么</th><th>市场现状 / 理由</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>编排层</strong></td>
+          <td>LangChain（原型）→ <strong>LangGraph（生产）</strong></td>
+          <td>LangChain 占编排层 <strong>70.6%</strong> 份额、134k stars，但独立基准显示复杂工作流下 Token 与延迟高于 LangGraph。策略是「LangChain 做发现层，生产迁 LangGraph」。</td>
+        </tr>
+        <tr>
+          <td><strong>工具协议</strong></td>
+          <td><strong>MCP</strong>（Python SDK + Go SDK）</td>
+          <td>工具调用事实标准，GitHub 相关仓库 1700+，81.1% 应用用官方 SDK。2026-07-28 最大更新是<strong>无状态化</strong>（取消 Session），Server 可像普通 HTTP 服务水平扩展——对 Go 开发者尤其友好。</td>
+        </tr>
+        <tr>
+          <td><strong>协作协议</strong></td>
+          <td>A2A（了解即可）</td>
+          <td>Google 发起，已移交 Linux Foundation 治理，150+ 组织生产部署。解决 Agent 之间委派任务，与 MCP 正交。求职阶段不必深挖。</td>
+        </tr>
+        <tr>
+          <td><strong>多 Agent 框架</strong></td>
+          <td>CrewAI，或 Microsoft Agent Framework</td>
+          <td class="nowrap"><span class="tag p0">重要变化</span> <strong>AutoGen 已进入维护模式</strong>，2025-10 与 Semantic Kernel 合并为 MAF，2026-04 发布 1.0 GA。新项目直接上 MAF，别从 AutoGen 学起。</td>
+        </tr>
+        <tr>
+          <td><strong>低代码</strong></td>
+          <td>Dify / Coze（会用即可）</td>
+          <td>快速验证原型用，JD 占 35%。别当核心竞争力——面试考的是你能不能手写。</td>
+        </tr>
+        <tr>
+          <td><strong>向量库</strong></td>
+          <td>Qdrant 或 Chroma 起步</td>
+          <td>先吃透一个的原理，Milvus / Pinecone 用法大同小异。面试问的是切分与检索策略，不是 API。</td>
+        </tr>
+        <tr>
+          <td><strong>可观测性</strong></td>
+          <td>LangSmith / Langfuse、OpenTelemetry</td>
+          <td>三层：日志、指标（延迟 / 吞吐 / 错误率 / Token）、链路追踪。没有 Tracing 数据，优化就是盲猜。<strong>OpenTelemetry 你可能有现成经验，直接复用。</strong></td>
+        </tr>
+        <tr>
+          <td><strong>评估</strong></td>
+          <td>黄金数据集 + LLM-as-Judge</td>
+          <td>指标：答案准确率、轮次、无效工具调用率、噪声工具使用率。评估标准要自己掌握，这是壁垒。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout danger">
+    <b>安全治理是个现成的加分点：</b>数据显示<strong>只有 37.2% 的 MCP 应用在工具执行前设置了人工审批关卡</strong>。你在项目里加一层工具审批 / 权限拦截（高风险工具 <code>require_approval</code>），既是真实工程能力，又能讲出「AI Agent 的安全边界」——大多数候选人根本想不到这一层。
+  </div>
+</section>
+
+<!-- ============ 7. 项目设计 ============ -->
+<section>
+  <h2><span class="idx">7</span>两个项目怎么设计（带双栈叙事）</h2>
+  <p class="lead">项目不在多，在于能形成对比叙事。一个证明落地，一个证明架构——并且都要体现你的 Go 优势。</p>
+
+  <div class="grid2">
+    <div class="card" style="margin:0;">
+      <h3 style="margin-top:0;">项目一：单 Agent + 强工程 + 明确业务</h3>
+      <p style="font-size:13.5px;color:var(--ink2);margin:0;">选一个深圳本地场景——AI 客服、供应链查询、硬件设备问答、金融合规问答都可以。</p>
+      <ul class="clean">
+        <li>RAG 知识库 + 工具调用（查订单 / 查库存 / 调内部 API）</li>
+        <li>LangGraph 编排，含失败重试与人工介入节点</li>
+        <li>FastAPI 服务化 + 限流 + 降级 + 完整 Tracing</li>
+        <li>自动化评测 Pipeline，输出准确率 / 成本 / 延迟报告</li>
+        <li><strong>Go 部分</strong>：工具网关用 Go 写，MCP 协议对接</li>
+      </ul>
+      <p style="font-size:13px;color:var(--teal);margin:12px 0 0;font-weight:600;">证明的是：我懂把 Agent 做成生产系统。</p>
+    </div>
+
+    <div class="card" style="margin:0;">
+      <h3 style="margin-top:0;">项目二：多 Agent + 复杂编排</h3>
+      <p style="font-size:13.5px;color:var(--ink2);margin:0;">设计一条协作链，例如「需求分析 → 检索 → 生成 → 自审」，或 Supervisor 模式下的分工调度。</p>
+      <ul class="clean">
+        <li>Agent 之间的分工、任务分发、全局状态合并</li>
+        <li>输出冲突时的仲裁机制（谁说了算 / 何时转人工）</li>
+        <li>防死循环：最大轮次、状态去重、终止条件</li>
+        <li>每个子 Agent 能力用 MCP 工具封装</li>
+        <li><strong>Go 部分</strong>：并行工具执行器 + 模型路由（故障转移）</li>
+      </ul>
+      <p style="font-size:13px;color:var(--purple);margin:12px 0 0;font-weight:600;">证明的是：我能设计复杂架构，且能跨语言拆解系统。</p>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <b>关于「玩具项目」的界定：</b>面试官区分玩具和生产级，看三件事——<strong>有没有异常处理、有没有容错降级、有没有效果评估</strong>。两个项目必须同时具备这三样，否则和教程里抄的没区别。
+  </div>
+</section>
+
+<!-- ============ 8. 面试考点 ============ -->
+<section>
+  <h2><span class="idx">8</span>面试考点清单</h2>
+  <p class="lead">来自大厂 AI Agent 岗位真实面经。带 ⚑ 的是你能直接拿分的题，带 🐍 的是 Go 背景要额外准备的 Python 题。</p>
+
+  <div class="grid2">
+    <div class="card tight" style="margin:0;">
+      <h3 style="margin-top:0;">一面：项目深挖 + RAG + 工程基础</h3>
+      <ul class="clean">
+        <li>完整讲一遍项目流程与你负责的模块</li>
+        <li>RAG 离线建库 / 在线检索分别做了什么</li>
+        <li>Chunk 大小与重叠窗口的确定依据</li>
+        <li>用 Recall@K、MRR 做过调优实验吗</li>
+        <li>Agent 工具调用成功率如何定义与提升</li>
+        <li>工具超时 / 脏数据 / 重复执行怎么兜底 ⚑</li>
+        <li>隐私数据的传输 / 存储 / 访问安全 ⚑</li>
+        <li>🐍 Python 的 asyncio 和 Go 的 goroutine 有什么区别</li>
+        <li>🐍 GIL 是什么，为什么 Agent 服务还要用多进程</li>
+        <li>🐍 一段同步代码混进 async 函数会怎样</li>
+        <li><strong>手写：LRU Cache（O(1)）</strong></li>
+      </ul>
+    </div>
+    <div class="card tight" style="margin:0;">
+      <h3 style="margin-top:0;">二面：架构 + 模型原理 + 系统能力</h3>
+      <ul class="clean">
+        <li>Agent 对比传统工作流的优势与生产难题</li>
+        <li>Token 划分原理、为什么以 Token 为单元</li>
+        <li>Transformer / Self-Attention，Q、K、V 的作用</li>
+        <li>Lost in the Middle；上下文窗口越大越好吗</li>
+        <li>超长对话：滑动窗口 / 摘要 / 向量召回怎么选</li>
+        <li>SFT 流程，PPO / DPO / GRPO 的差异</li>
+        <li>为什么用多 Agent，冲突如何仲裁</li>
+        <li>线上 CPU 飙高 / 内存持续上涨怎么排查 ⚑</li>
+        <li>mmap 是什么、解决什么问题 ⚑</li>
+        <li>writev 如何聚合缓冲区减少系统调用 ⚑</li>
+        <li><strong>手写：扁平 JSON 还原树 / 二叉树锯齿层序遍历</strong></li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout">
+    <b>⚑ 标记的题就是你的护城河。</b>转行者通常在这些题上失分，而你有真实经验。面试时主动把话题往「生产环境的异常处理」引，让面试官在你的优势区提问。
+  </div>
+</section>
+
+<!-- ============ 9. 避坑 ============ -->
+<section>
+  <h2><span class="idx">9</span>避坑清单</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>坑</th><th>正确做法</th></tr></thead>
+      <tbody>
+        <tr><td><strong>用 Go 的并发心智写 Python</strong>，在 async 函数里调 <code>requests</code> / <code>time.sleep</code></td><td>Agent 服务里只用异步库：<code>httpx.AsyncClient</code> / <code>asyncio.sleep</code> / 异步 DB 驱动。这是最容易出线上事故的坑</td></tr>
+        <tr><td>用裸 <code>pip install</code> 管依赖，最后环境崩了</td><td>用 <code>uv</code> + <code>pyproject.toml</code> + 锁文件，把 Python 当 Go 一样管依赖</td></tr>
+        <tr><td>放弃类型标注，写纯动态 Python</td><td>全程 type hints + <code>mypy</code> + <code>ruff</code>。既防 bug，也是工程素养的体现</td></tr>
+        <tr><td>花时间纠结「该不该用 Go 写 Agent」</td><td>应用层用 Python（生态决定），基础设施层用 Go（性能决定）。别站队，用双栈</td></tr>
+        <tr><td>囤课不看，教程收藏几十 G</td><td>只学当周要用的，文档优先于视频。跑不起来不进下一周</td></tr>
+        <tr><td>一上来就用 Dify / Coze，跳过原理</td><td>先用原生 API 手写 Function Calling，再上框架。否则面试问原理就露馅</td></tr>
+        <tr><td>花大量时间学模型微调 / 训练</td><td>JD 只占 35% 且是算法岗地盘，你不占优。拿到 offer 后再补</td></tr>
+        <tr><td>从 AutoGen 开始学多 Agent</td><td>AutoGen 已进维护模式，新项目用 Microsoft Agent Framework 或 CrewAI</td></tr>
+        <tr><td>项目做完不留量化数据</td><td>从第一天记录：准确率、延迟、Token 成本、优化前后对比</td></tr>
+        <tr><td>只做一个项目</td><td>两个项目形成对比叙事，否则面试官怀疑是抄的</td></tr>
+        <tr><td>忽略工具执行安全</td><td>加审批关卡（高风险工具 <code>require_approval</code>）。仅 37.2% 的应用做了这件事，是差异化加分点</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 10. 资源 ============ -->
+<section>
+  <h2><span class="idx">10</span>学习资源优先级</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>优先级</th><th>资源</th><th>怎么用</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag p0">最高</span></td><td>官方文档（LangGraph、MCP Python / Go SDK、FastAPI、Qdrant）</td><td>一手信息，比任何二手教程都准。当周用到什么查什么</td></tr>
+        <tr><td><span class="tag p0">最高</span></td><td>GitHub 上的开源 Agent 项目源码</td><td>读别人怎么组织状态图、怎么做重试降级。比教程有用十倍</td></tr>
+        <tr><td><span class="tag go">Go 专属</span></td><td><code>go.sdk.modelcontextprotocol.io</code></td><td>MCP 官方 Go SDK 文档，你的差异化起点</td></tr>
+        <tr><td><span class="tag p1">高</span></td><td>牛客网 / 掘金上的真实面经</td><td>反推考点。每周刷 3–5 篇深圳 Agent 岗面经</td></tr>
+        <tr><td><span class="tag p1">高</span></td><td>BOSS 直聘 JD 原文</td><td>每周看 10 条深圳在招 JD，不认识的词逐个击破</td></tr>
+        <tr><td><span class="tag p2">中</span></td><td>技术博客 / 公众号文章</td><td>快速建立框架认知，但注意时效性，以官方文档为准</td></tr>
+        <tr><td><span class="tag skip">低</span></td><td>体系化的付费视频课</td><td>容易变成「看完了但写不出来」。真要买，只买带实战项目的</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 11. 验收 ============ -->
+<section>
+  <h2><span class="idx">11</span>出关验收：满足这几条就可以投了</h2>
+  <div class="card">
+    <label class="ck"><input type="checkbox" class="ck"><span>能用 <code>async</code> / <code>await</code> + <code>asyncio.gather</code> 写并发代码，并说清它和 goroutine 的区别</span></label>
+    <label class="ck"><input type="checkbox" class="ck"><span>能用 Pydantic 定义工具参数 Schema 和结构化输出</span></label>
+    <label class="ck"><input type="checkbox" class="ck"><span>能不看资料手写一次完整的 Function Calling 调用循环</span></label>
+    <label class="ck"><input type="checkbox" class="ck"><span>手里有一张 RAG 切分参数对比实验表（含 Recall@K / MRR 数据）</span></label>
+    <label class="ck"><input type="checkbox" class="ck"><span>能用 LangGraph 画出项目状态图，并解释每个分支和重试路径的设计理由</span></label>
+    <label class="ck"><input type="checkbox" class="ck"><span>有一个跑通的 Go 版 MCP Server，被 Python 侧 Agent 正常调用</span></label>
+    <label class="ck"><input type="checkbox" class="ck"><span>项目有完整的限流、降级、重试机制，能演示触发后的行为</span></label>
+    <label class="ck"><input type="checkbox" class="ck"><span>有自动化评测报告，能报出准确率、延迟、Token 成本三个数字</span></label>
+    <label class="ck"><input type="checkbox" class="ck"><span>两个项目都已上传 GitHub，README 含架构图、语言分工说明和量化结果</span></label>
+    <label class="ck"><input type="checkbox" class="ck"><span>不看代码能在 30 分钟内讲完两个项目的架构、选型、踩坑、优化</span></label>
+    <label class="ck"><input type="checkbox" class="ck"><span>能白板手写 LRU Cache 和 TopK 小根堆</span></label>
+    <label class="ck"><input type="checkbox" class="ck"><span>能回答「Token 划分原理」「Lost in the Middle」「GIL 与多进程」</span></label>
+  </div>
+  <div class="callout">
+    <b>关于时间预期：</b>11 周是「每周稳定 15 小时」的节奏。如果某几周被工作打断就顺延，别压缩动手时间。真实的门槛不是学完这些知识，而是<strong>手里有没有两个能扛住 5 层追问的项目</strong>。第 1 周的 Python 迁移如果顺利，可以和第 2 周部分重叠，整体压到 10 周。
+  </div>
+</section>
+
+<footer>
+  <p><b>路线依据：</b>基于深圳 790+ 在招 Agent 岗位的能力要求统计、50 份真实 JD 词频分析、大厂 AI Agent 岗位真实面经，以及 2026 年最新工具链生态数据（LangChain 编排层 70.6% 份额、MCP 工具调用事实标准、AutoGen 并入 Microsoft Agent Framework、MCP 官方 Go SDK 于 2026-07-28 更新）。</p>
+  <p><b>说明：</b>技术生态迭代快，建议每两周回看一次官方文档确认选型未变。薪资与岗位要求以招聘平台实时信息为准。</p>
+  <p>生成时间：2026-10-08 · 修订版（Go 开发者定制）</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('input.ck'));
+  var fill = document.getElementById('pf');
+  var txt  = document.getElementById('pt');
+  var KEY  = 'agent-roadmap-go-progress-v1';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e) { saved = {}; }
+
+  function render(){
+    var done = 0;
+    boxes.forEach(function(b){ if (b.checked) done++; });
+    var pct = boxes.length ? Math.round(done / boxes.length * 100) : 0;
+    if (fill) fill.style.width = pct + '%';
+    if (txt) txt.textContent = done + ' / ' + boxes.length;
+  }
+
+  boxes.forEach(function(b, i){
+    if (saved['b' + i]) b.checked = true;
+    b.addEventListener('change', function(){
+      saved['b' + i] = b.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch(e) {}
+      render();
+    });
+  });
+  render();
+})();
+</script>
+
+</body>
+</html>

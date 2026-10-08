@@ -1,0 +1,50 @@
+[project]
+name = "agent-week1"
+version = "0.1.0"
+description = "AI Agent 转行学习 · 第 1 周：Python for AI 速成（Go 开发者视角）"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.27",
+    "pydantic>=2.9",
+    "python-dotenv>=1.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.7",
+    "mypy>=1.13",
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+]
+
+# ---- ruff：≈ gofmt + go vet ----
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+# ANN 会强制要求类型标注，这是给 Go 开发者的"安全带"
+select = ["E", "F", "I", "UP", "B", "ANN"]
+
+[tool.ruff.lint.per-file-ignores]
+# 测试函数不必强制写全类型标注
+"tests/*" = ["ANN201", "ANN001"]
+
+# ---- mypy：≈ 找回一部分编译期类型检查 ----
+[tool.mypy]
+strict = true
+python_version = "3.12"
+warn_unreachable = true
+
+# ---- pytest ----
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["."]
+
+# 这是个应用，不是要发布的库：
+# 关掉打包，uv 只负责装依赖，不把项目本身装进环境。
+# 好处是 src/ 结构随便放，不用为了打包去凑同名目录。
+[tool.uv]
+package = false

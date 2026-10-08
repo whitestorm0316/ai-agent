@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>深圳 AI Agent 岗位需求调研报告 · 2026.10</title>
+<style>
+  :root{
+    --bg:#f5f6f8;
+    --card:#ffffff;
+    --ink:#16181d;
+    --ink2:#4a4f5a;
+    --ink3:#868c99;
+    --line:#e6e8ee;
+    --accent:#3557d6;
+    --accent-soft:#eaefff;
+    --teal:#0f9b8e;
+    --teal-soft:#e3f7f4;
+    --amber:#d98324;
+    --amber-soft:#fdf1e2;
+    --purple:#7b4bd6;
+    --purple-soft:#f2ecfe;
+    --rose:#d6455f;
+    --rose-soft:#fdecef;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px 80px;}
+
+  /* ---------- header ---------- */
+  header{
+    padding:64px 0 40px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:44px;
+  }
+  .kicker{
+    display:inline-block;
+    font-size:12px;
+    letter-spacing:.14em;
+    color:var(--accent);
+    background:var(--accent-soft);
+    padding:5px 12px;
+    border-radius:100px;
+    font-weight:600;
+    margin-bottom:20px;
+  }
+  h1{
+    font-size:38px;
+    line-height:1.25;
+    margin:0 0 16px;
+    letter-spacing:-.02em;
+    font-weight:700;
+  }
+  .sub{font-size:16px;color:var(--ink2);max-width:760px;margin:0 0 28px;}
+  .meta{font-size:13px;color:var(--ink3);display:flex;flex-wrap:wrap;gap:8px 22px;}
+
+  /* ---------- stat cards ---------- */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:8px;}
+  .stat{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:20px 18px;
+  }
+  .stat .num{font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.2;}
+  .stat .lbl{font-size:12.5px;color:var(--ink3);margin-top:6px;}
+  .stat .num.blue{color:var(--accent);}
+  .stat .num.teal{color:var(--teal);}
+  .stat .num.amber{color:var(--amber);}
+  .stat .num.purple{color:var(--purple);}
+
+  /* ---------- sections ---------- */
+  section{margin-bottom:56px;}
+  h2{
+    font-size:23px;margin:0 0 6px;letter-spacing:-.01em;font-weight:700;
+    display:flex;align-items:center;gap:12px;
+  }
+  h2 .idx{
+    font-size:12px;font-weight:700;color:#fff;background:var(--ink);
+    width:26px;height:26px;border-radius:8px;display:inline-flex;
+    align-items:center;justify-content:center;flex:0 0 auto;
+  }
+  .lead{color:var(--ink2);font-size:14.5px;margin:0 0 22px;padding-left:38px;}
+  h3{font-size:16px;margin:28px 0 12px;font-weight:650;}
+
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:24px 26px;margin-bottom:16px;
+  }
+  .card.tight{padding:20px 22px;}
+
+  /* ---------- table ---------- */
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  th{
+    text-align:left;font-weight:600;color:var(--ink3);font-size:12px;
+    letter-spacing:.05em;padding:0 12px 10px 0;border-bottom:1px solid var(--line);
+    white-space:nowrap;
+  }
+  td{padding:13px 12px 13px 0;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink2);}
+  tr:last-child td{border-bottom:none;}
+  td strong{color:var(--ink);font-weight:600;}
+  .nowrap{white-space:nowrap;}
+
+  /* ---------- bar chart ---------- */
+  .bar-row{display:grid;grid-template-columns:150px 1fr 54px;gap:14px;align-items:center;padding:7px 0;}
+  .bar-name{font-size:13px;color:var(--ink);font-weight:550;}
+  .bar-track{height:9px;background:#eef0f4;border-radius:100px;overflow:hidden;}
+  .bar-fill{height:100%;border-radius:100px;background:var(--accent);}
+  .bar-fill.t{background:var(--teal);}
+  .bar-fill.a{background:var(--amber);}
+  .bar-fill.p{background:var(--purple);}
+  .bar-fill.r{background:var(--rose);}
+  .bar-val{font-size:12.5px;color:var(--ink3);text-align:right;font-variant-numeric:tabular-nums;}
+
+  /* ---------- cluster cards ---------- */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .mini{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;
+  }
+  .mini h4{margin:0 0 8px;font-size:15px;font-weight:650;display:flex;align-items:center;gap:8px;}
+  .mini p{margin:0;font-size:13px;color:var(--ink2);}
+  .mini ul{margin:8px 0 0;padding-left:18px;font-size:13px;color:var(--ink2);}
+  .mini li{margin:3px 0;}
+  .tag{
+    font-size:11px;padding:2px 8px;border-radius:100px;font-weight:600;
+    letter-spacing:.03em;flex:0 0 auto;
+  }
+  .tag.p0{background:var(--rose-soft);color:var(--rose);}
+  .tag.p1{background:var(--amber-soft);color:var(--amber);}
+  .tag.p2{background:var(--teal-soft);color:var(--teal);}
+  .tag.gray{background:#f0f1f5;color:var(--ink3);}
+
+  /* ---------- JD block ---------- */
+  .jd{border-left:3px solid var(--accent);padding-left:20px;margin:22px 0;}
+  .jd-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:4px;}
+  .jd-title{font-size:16px;font-weight:650;}
+  .jd-co{font-size:13px;color:var(--ink3);}
+  .jd-pay{font-size:14px;font-weight:650;color:var(--rose);}
+  .jd-body{font-size:13.5px;color:var(--ink2);margin-top:10px;}
+  .jd-body b{color:var(--ink);font-weight:600;}
+
+  /* ---------- callout ---------- */
+  .callout{
+    background:var(--accent-soft);border-radius:14px;padding:20px 24px;
+    font-size:14px;color:#22307a;margin:20px 0;
+  }
+  .callout b{font-weight:700;}
+  .callout.warn{background:var(--amber-soft);color:#7a4a10;}
+
+  .stack-layer{
+    display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--line);
+  }
+  .stack-layer:last-child{border-bottom:none;}
+  .stack-num{
+    width:28px;height:28px;border-radius:9px;background:#eef0f4;color:var(--ink2);
+    display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex:0 0 auto;
+  }
+  .stack-body h4{margin:2px 0 4px;font-size:14.5px;font-weight:650;}
+  .stack-body p{margin:0;font-size:13px;color:var(--ink2);}
+
+  footer{
+    border-top:1px solid var(--line);padding-top:24px;font-size:12.5px;
+    color:var(--ink3);
+  }
+  footer p{margin:4px 0;}
+
+  @media (max-width:860px){
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .grid2,.grid3{grid-template-columns:1fr;}
+    .bar-row{grid-template-columns:110px 1fr 46px;}
+    h1{font-size:29px;}
+    .wrap{padding:0 18px 60px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <span class="kicker">岗位调研 · 深圳</span>
+  <h1>深圳 AI Agent 岗位需求调研</h1>
+  <p class="sub">从 BOSS 直聘、牛客网、猎聘、智联等平台在招的深圳 Agent 类岗位中，反向拆出招聘方真正在要的能力。结论先说：<strong>门槛是 Python + LangChain/LangGraph + RAG + 工具调用，真正拉开差距的是「把 Demo 做成生产级系统」的工程细节和业务抽象能力。</strong></p>
+  <div class="meta">
+    <span>数据窗口：2026 年 5 月 – 10 月</span>
+    <span>样本：790+ 深圳 Agent 相关职位 + 50 份 JD 能力频次统计 + 12 份 JD 原文</span>
+    <span>整理时间：2026-10-08</span>
+  </div>
+</header>
+
+<!-- ============ 概览 ============ -->
+<section>
+  <div class="stats">
+    <div class="stat"><div class="num blue">790+</div><div class="lbl">深圳在招 Agent 相关职位</div></div>
+    <div class="stat"><div class="num teal">101 家</div><div class="lbl">放出岗位的公司数量</div></div>
+    <div class="stat"><div class="num amber">28–50K</div><div class="lbl">主流月薪区间（软件类 / 大厂）</div></div>
+    <div class="stat"><div class="num purple">100%</div><div class="lbl">JD 中要求 Python 的比例</div></div>
+  </div>
+</section>
+
+<!-- ============ 一、岗位地图 ============ -->
+<section>
+  <h2><span class="idx">1</span>谁在招：六类雇主，需求结构完全不同</h2>
+  <p class="lead">深圳的 Agent 岗位不是一类东西。同样叫「AI Agent 工程师」，在硬件公司、SaaS 公司、大厂和银行，干的活和考的能力差别很大。</p>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr><th>雇主类型</th><th>公司 / 职位</th><th>平均月薪</th><th>典型岗位</th><th>代表公司</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>互联网 / 大厂</strong></td>
+          <td class="nowrap">24 家 / 91 个</td>
+          <td class="nowrap"><strong>50.5K</strong></td>
+          <td>Agent 架构师、Agent 算法专家、Agent 开发工程师、AI 产品经理</td>
+          <td>字节、腾讯、百度、蚂蚁、金蝶</td>
+        </tr>
+        <tr>
+          <td><strong>计算机软件 / SaaS</strong></td>
+          <td class="nowrap">32 家 / 65 个</td>
+          <td class="nowrap">28.1K</td>
+          <td>AI 应用开发工程师、数智化平台 SE、Agent 应用工程师</td>
+          <td>金蝶、各类企业服务 / OA / RPA 厂商</td>
+        </tr>
+        <tr>
+          <td><strong>智能硬件 / 消费电子</strong></td>
+          <td class="nowrap">22 家 / 56 个</td>
+          <td class="nowrap">34.7K</td>
+          <td>AI 开发工程师、视觉 / 语音 Agent 算法、硬件 AI 产品经理</td>
+          <td>大疆、vivo、安克创新、极米、韶音、拓竹</td>
+        </tr>
+        <tr>
+          <td><strong>AI 原生公司</strong></td>
+          <td class="nowrap">16 家 / 33 个</td>
+          <td class="nowrap">30.7K</td>
+          <td>Agent 产品经理、具身智能 AI 专家、渠道生态（卖 Agent 方案）</td>
+          <td>智元机器人、魔法原子、艾氪智能、九瓴科技</td>
+        </tr>
+        <tr>
+          <td><strong>科技金融</strong></td>
+          <td class="nowrap">7 家 / 30 个</td>
+          <td class="nowrap">33.9K</td>
+          <td>AI 风控 / Agent 风险专家、金融 AI 解决方案、量化投研（AI 驱动）</td>
+          <td>蚂蚁、平安系、招商基金、华林证券、晶泰科技</td>
+        </tr>
+        <tr>
+          <td><strong>物流 / 电商 / 专业服务 / 生物</strong></td>
+          <td class="nowrap">—</td>
+          <td class="nowrap">13–45K</td>
+          <td>供应链 Agent、AI 客服、工业视觉 Agent、生物信息 AI Agent</td>
+          <td>顺丰科技、万邑通、傲基、华大集团</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid2">
+    <div class="mini">
+      <h4>大厂 / 平台型：招「架构级」</h4>
+      <p>做的是基础设施层（Agent 平台、Harness、工具链）。要求大厂背景 + 出海英语能力，职级高、薪资天花板高，但坑位少。</p>
+    </div>
+    <div class="mini">
+      <h4>SaaS / 硬件 / AI 原生：招「全栈 + 懂场景」</h4>
+      <p>零散需求最多，单家公司平均 2 个岗位。要既懂传统业务（ERP、嵌入式、机器人），又能把大模型接进去。这类岗位对「非大厂背景」最友好。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 二、薪资 ============ -->
+<section>
+  <h2><span class="idx">2</span>给多少钱：深圳的价格带</h2>
+  <p class="lead">深圳南山区平均月薪约 21.7K。Agent 岗位整体高于传统开发，但内部分化极大——同一座城市里 15K 和 100K 的岗位同时存在。</p>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr><th>层级</th><th>月薪（一线城市）</th><th>典型要求</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>应届 / 实习</td><td class="nowrap">8–15K</td><td>Python 基础 + 1 个完整 Agent/RAG 项目</td></tr>
+        <tr><td>1–3 年</td><td class="nowrap">12–25K</td><td>独立交付过生产环境 Agent，会 LangChain / RAG</td></tr>
+        <tr><td>3–5 年</td><td class="nowrap">20–40K</td><td>多智能体架构、稳定性与成本控制、能带项目</td></tr>
+        <tr><td>5 年+ / 专家</td><td class="nowrap">30–60K+（架构师可到 100–200K）</td><td>全链路设计、平台化、技术方案与商业目标对齐</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>深圳实际在招的薪资样本</h3>
+  <div class="card tight">
+    <table>
+      <tbody>
+        <tr><td><strong>金蝶</strong> · Agent Harness 平台架构师</td><td class="nowrap" style="color:var(--rose);font-weight:600;">100–200K</td></tr>
+        <tr><td><strong>腾讯</strong> · ima Agent 策略产品经理</td><td class="nowrap" style="color:var(--rose);font-weight:600;">25–50K × 15 薪</td></tr>
+        <tr><td><strong>字节</strong> · 飞书 Aily / 火山引擎 FDE 方向 Agent 开发</td><td class="nowrap" style="color:var(--rose);font-weight:600;">30–60K × 15 薪</td></tr>
+        <tr><td><strong>商汤（深圳南山）</strong> · Agent 开发工程师</td><td class="nowrap" style="color:var(--rose);font-weight:600;">30–60K × 15 薪</td></tr>
+        <tr><td><strong>BOSS 直聘某公司（龙岗坂田）</strong> · AI Agent 工程师（客服 Agent）</td><td class="nowrap" style="color:var(--rose);font-weight:600;">28–45K × 13 薪</td></tr>
+        <tr><td><strong>深圳某初创（南山）</strong> · AIGC 算法工程师（硕士）</td><td class="nowrap" style="color:var(--rose);font-weight:600;">25–45K</td></tr>
+        <tr><td><strong>洞墟科技（福田）</strong> · AI 智能体开发工程师（Agent 方向 · 核心）</td><td class="nowrap" style="color:var(--rose);font-weight:600;">15–17K × 14 薪</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout">
+    <b>读法：</b>15–17K 那档不是「低」，而是中小公司的 1–3 年定价，且 JD 写得很实在（LangGraph + 长期记忆 + 评估 Pipeline），技术密度可能比某些大厂岗位更高。真正决定价格的是<strong>「有没有独立交付过生产级 Agent」</strong>，而不是年限。
+  </div>
+</section>
+
+<!-- ============ 三、能力频次 ============ -->
+<section>
+  <h2><span class="idx">3</span>要什么能力：JD 里的高频关键词</h2>
+  <p class="lead">对 50 份真实 JD 做关键词统计，出现频次就是市场用脚投票的结果。</p>
+
+  <div class="card">
+    <div class="bar-row"><div class="bar-name">Python</div><div class="bar-track"><div class="bar-fill r" style="width:100%"></div></div><div class="bar-val">100%</div></div>
+    <div class="bar-row"><div class="bar-name">LangChain</div><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><div class="bar-val">80%</div></div>
+    <div class="bar-row"><div class="bar-name">RAG / 知识库</div><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div><div class="bar-val">60%</div></div>
+    <div class="bar-row"><div class="bar-name">Prompt Engineering</div><div class="bar-track"><div class="bar-fill" style="width:45%"></div></div><div class="bar-val">45%</div></div>
+    <div class="bar-row"><div class="bar-name">向量数据库</div><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><div class="bar-val">40%</div></div>
+    <div class="bar-row"><div class="bar-name">C++（算法岗为主）</div><div class="bar-track"><div class="bar-fill a" style="width:35%"></div></div><div class="bar-val">35%</div></div>
+    <div class="bar-row"><div class="bar-name">模型微调 / 训练</div><div class="bar-track"><div class="bar-fill a" style="width:35%"></div></div><div class="bar-val">35%</div></div>
+    <div class="bar-row"><div class="bar-name">Dify / Coze 低代码</div><div class="bar-track"><div class="bar-fill a" style="width:35%"></div></div><div class="bar-val">35%</div></div>
+    <div class="bar-row"><div class="bar-name">PyTorch</div><div class="bar-track"><div class="bar-fill a" style="width:30%"></div></div><div class="bar-val">30%</div></div>
+    <div class="bar-row"><div class="bar-name">LangGraph</div><div class="bar-track"><div class="bar-fill t" style="width:25%"></div></div><div class="bar-val">25%</div></div>
+    <div class="bar-row"><div class="bar-name">FastAPI / 服务化</div><div class="bar-track"><div class="bar-fill t" style="width:20%"></div></div><div class="bar-val">20%</div></div>
+    <div class="bar-row"><div class="bar-name">Go / Java</div><div class="bar-track"><div class="bar-fill p" style="width:15%"></div></div><div class="bar-val">各 15%</div></div>
+    <div class="bar-row"><div class="bar-name">AutoGen（多 Agent）</div><div class="bar-track"><div class="bar-fill p" style="width:15%"></div></div><div class="bar-val">15%</div></div>
+    <div class="bar-row"><div class="bar-name">MCP 协议</div><div class="bar-track"><div class="bar-fill p" style="width:10%"></div></div><div class="bar-val">10%</div></div>
+    <div class="bar-row"><div class="bar-name">多模态理解</div><div class="bar-track"><div class="bar-fill p" style="width:10%"></div></div><div class="bar-val">10%</div></div>
+  </div>
+
+  <div class="callout warn">
+    <b>注意 MCP 只有 10%：</b>它是 2026 年涨得最快的一项，但目前仍属「加分项」而非「门槛」。同理，LangGraph、AutoGen 的占比低于 LangChain，说明<strong>多数岗位还停留在「单 Agent + RAG」阶段，真正上多智能体的公司是少数</strong>——这恰恰是差异化机会。
+  </div>
+
+  <h3>学历与经验门槛</h3>
+  <div class="card tight">
+    <table>
+      <thead><tr><th>门槛</th><th>占比</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>本科及以上</td><td class="nowrap">约 60%</td><td>大部分岗位的底线，AI 应用开发不等于算法岗</td></tr>
+        <tr><td>硕士及以上</td><td class="nowrap">约 25%</td><td>大厂 / 研究型 / 算法岗为主</td></tr>
+        <tr><td>不限学历</td><td class="nowrap">约 10%</td><td>能力 / 项目驱动型公司</td></tr>
+        <tr><td>要求 3 年+ 经验</td><td class="nowrap">约 30%</td><td>社招主流</td></tr>
+        <tr><td>1–3 年 / 应届</td><td class="nowrap">约 45%</td><td>初中级岗 + 大厂校招</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 四、技术栈五层 ============ -->
+<section>
+  <h2><span class="idx">4</span>技术栈全景：从模型到运维的五层</h2>
+  <p class="lead">把 JD 里零散的技术名词按层次归位，能看清一件事——Agent 工程师不是「更懂模型的人」，而是「更会做系统的人」。</p>
+
+  <div class="card">
+    <div class="stack-layer">
+      <div class="stack-num">1</div>
+      <div class="stack-body">
+        <h4>基础设施与模型层（大脑）</h4>
+        <p>GPT-4o / Claude / Gemini，国产 Qwen、DeepSeek、GLM、Kimi。核心不是背模型参数，而是<strong>模型无关化开发</strong>——能按成本、延迟、中文效果灵活切换，不被单一厂商锁定。</p>
+      </div>
+    </div>
+    <div class="stack-layer">
+      <div class="stack-num">2</div>
+      <div class="stack-body">
+        <h4>协议与工具层（手脚）</h4>
+        <p>Function Calling / Tool Use 是硬门槛；MCP（Model Context Protocol）正在成为工具接入的事实标准，A2A 解决 Agent 之间的任务委托。要求能把企业内部的 CRM / ERP / SQL / 审批系统封装成标准工具。</p>
+      </div>
+    </div>
+    <div class="stack-layer">
+      <div class="stack-num">3</div>
+      <div class="stack-body">
+        <h4>编排与逻辑层（神经系统）</h4>
+        <p>ReAct（简单任务）、Plan-and-Execute（强流程）、LangGraph（状态机 / 条件分支 / 循环重试，工业级首选）、CrewAI（角色驱动多 Agent）、AutoGen（对话驱动）。低代码平台 Dify / Coze 用于快速验证。</p>
+      </div>
+    </div>
+    <div class="stack-layer">
+      <div class="stack-num">4</div>
+      <div class="stack-body">
+        <h4>检索与记忆层（知识库）</h4>
+        <p>RAG 全链路：切分策略、Embedding、混合检索、重排序。向量库 Milvus / Chroma / Qdrant / Pinecone。记忆分三层——短期（对话上下文）、长期（向量库历史知识）、工作记忆（当前任务状态）。2026 的趋势是 RAG 从「万能架构」回归为「特定场景组件」。</p>
+      </div>
+    </div>
+    <div class="stack-layer">
+      <div class="stack-num">5</div>
+      <div class="stack-body">
+        <h4>工程与运维层（骨架）</h4>
+        <p>Python + AsyncIO 异步编程、FastAPI 服务化、Docker / K8s、Redis / Kafka、可观测性工具 LangSmith / Langfuse。这一层是「Demo 能不能上线」的分水岭。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 五、能力簇 ============ -->
+<section>
+  <h2><span class="idx">5</span>招聘方到底在考什么：七个能力簇</h2>
+  <p class="lead">把 JD 的职责与要求去重归纳，得到七个能力簇。按「JD 提及密度 + 面试追问深度」排序。</p>
+
+  <div class="grid2">
+    <div class="mini">
+      <h4>工程落地能力 <span class="tag p0">P0 核心</span></h4>
+      <p>几乎每份 JD 都写的一句话：「能将 Demo 工程化到生产级」。拆开是——异常处理、限流、降级、重试、监控、可观测性、高并发。</p>
+      <ul>
+        <li>工具调用超时 / 脏数据 / 重复执行怎么办</li>
+        <li>线上 CPU 飙高、内存持续上涨怎么排查</li>
+        <li>这是面试官最爱深挖、也最容易暴露短板的地方</li>
+      </ul>
+    </div>
+    <div class="mini">
+      <h4>Agent 架构设计 <span class="tag p0">P0 核心</span></h4>
+      <p>能说清为什么用这个架构，而不是只会调框架。</p>
+      <ul>
+        <li>ReAct / Plan-and-Execute / Supervisor 的适用边界</li>
+        <li>为什么用多 Agent？改单 Agent 会怎样？</li>
+        <li>子 Agent 如何分工、分发、合并全局状态</li>
+        <li>结论冲突如何仲裁，何时需要人工介入</li>
+      </ul>
+    </div>
+    <div class="mini">
+      <h4>RAG 全链路 <span class="tag p0">P0 核心</span></h4>
+      <p>不是「会搭一个知识库问答」，而是要能解释每个参数的依据。</p>
+      <ul>
+        <li>Chunk 大小、重叠窗口怎么定</li>
+        <li>用 Recall@K、MRR 做过实验调优吗</li>
+        <li>混合检索、重排序、长上下文 vs RAG 的取舍</li>
+      </ul>
+    </div>
+    <div class="mini">
+      <h4>工具调用与协议 <span class="tag p1">P1 重要</span></h4>
+      <p>Agent 区别于聊天机器人的本质能力。</p>
+      <ul>
+        <li>Function Calling / Tool Use 成功率如何定义与提升</li>
+        <li>超时、返回脏数据、重复执行的兜底策略</li>
+        <li>MCP 工具链封装（占比 10%，但增长最快）</li>
+      </ul>
+    </div>
+    <div class="mini">
+      <h4>记忆系统 <span class="tag p1">P1 重要</span></h4>
+      <p>「记得住、忘得掉、查得到」是工程难点。</p>
+      <ul>
+        <li>短期 / 长期 / 工作记忆分别怎么设计</li>
+        <li>历史对话什么场景做摘要、什么场景做召回</li>
+        <li>mem0 / A-Mem / pgvector 等方案选型</li>
+      </ul>
+    </div>
+    <div class="mini">
+      <h4>评估与成本控制 <span class="tag p1">P1 重要</span></h4>
+      <p>模型有随机性，没有评估就没有迭代。</p>
+      <ul>
+        <li>LLM-as-Judge、Reflection 自反思机制</li>
+        <li>任务完成率、工具调用准确率、幻觉率、Token 消耗</li>
+        <li>效果 / 效率 / 成本一体化指标</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px;">
+    <h4 style="margin:0 0 8px;font-size:15px;font-weight:650;">业务抽象能力 <span class="tag p2" style="margin-left:6px;">分水岭</span></h4>
+    <p style="margin:0;font-size:13.5px;color:var(--ink2);">把「帮我看看这家公司有没有风险」拆成：查工商库 → 抓舆情 → 比对监管处罚 → 检查财务异常 → 生成摘要。识别哪些环节该自动化、哪些必须人工介入、如何在模型不确定性 / 执行效率 / 业务容错率之间找平衡——<strong>这一条是高级工程师和普通开发者的分界线，也是 JD 里写不出来但面试一定会问的东西。</strong></p>
+  </div>
+</section>
+
+<!-- ============ 六、真实 JD ============ -->
+<section>
+  <h2><span class="idx">6</span>四份真实 JD 原文拆解</h2>
+  <p class="lead">下面是从深圳在招岗位中挑出的、要求写得最具体的几条，可以直接当能力清单对照。</p>
+
+  <div class="jd">
+    <div class="jd-head">
+      <span class="jd-title">AI 智能体开发工程师（Agent 方向 · 核心）</span>
+      <span class="jd-co">洞墟科技 · 深圳福田 · 本科 / 1–3 年</span>
+      <span class="jd-pay">15–17K × 14 薪</span>
+    </div>
+    <div class="jd-body">
+      <b>职责：</b>基于 LangGraph + LangChain 搭建多 Agent 编排系统（Supervisor 模式下策略 / 视频生产 / 归因 Agent 协同）；设计基于 mem0 / A-Mem / pgvector 的长期记忆模块，支持单租户 200K Tokens 级资产沉淀与检索；搭建 LLM-as-Judge 质量门控 Pipeline 与 Reflection 自反思机制；将 Agent 能力封装为生产级 FastAPI 服务，保障高并发、异常降级、可观测性；跟进 Reflexion、AutoGen、MetaGPT 等前沿并迭代 Skill / MCP 工具链。<br>
+      <b>要求：</b>2 年以上 Python 工程化经验；至少 1 年 LangGraph / LangChain / LlamaIndex 实战，<strong>独立交付过生产环境 Agent 项目</strong>；熟悉 Supervisor / Reflection / ReAct 范式，有 Function Call 调优经验；熟悉 PostgreSQL / pgvector / Redis，有 RAG 搭建经验。<br>
+      <b>加分：</b>mem0 等长期记忆系统、LLM-as-Judge 评估体系、Sora / Veo / Kling 等视频生成 API 编排、AI 营销 / 电商带货 B 端落地经验。
+    </div>
+  </div>
+
+  <div class="jd" style="border-left-color:var(--teal);">
+    <div class="jd-head">
+      <span class="jd-title">Agent 开发工程师</span>
+      <span class="jd-co">商汤科技 · 深圳南山 · 本科及以上</span>
+      <span class="jd-pay">30–60K × 15 薪</span>
+    </div>
+    <div class="jd-body">
+      <b>职责：</b>基于 Qwen / DeepSeek / SenseNova 等主流模型设计开发 AI Agent；负责任务规划、工具 / API 调用、记忆机制（RAG）与结果校验；用 LangChain / LangGraph / AutoGen 构建单 / 多 Agent 协作流程；优化 Prompt 提升输出稳定性、准确性与可控性；将 Agent 封装为 API 或服务集成进业务系统，关注<strong>效果、成本与延迟</strong>。<br>
+      <b>要求：</b>精通 Python；熟悉 LangChain / LangGraph / LlamaIndex / AutoGen 之一；熟悉 RAG 架构与向量数据库（Milvus / Chroma / Pinecone）；有 Function Calling / Tool Use 实际开发经验，能处理模型幻觉与异常输出；了解 API 设计、服务化与 Docker。<br>
+      <b>加分：</b>FastAPI / asyncio 异步编程、多 Agent 项目落地、SFT / LoRA 微调、能快速复现论文或开源项目、有开源项目或技术博客。
+    </div>
+  </div>
+
+  <div class="jd" style="border-left-color:var(--amber);">
+    <div class="jd-head">
+      <span class="jd-title">AI Agent 工程师（AI 客服 Agent）</span>
+      <span class="jd-co">BOSS 直聘某公司 · 深圳龙岗坂田 · 本科 / 3–5 年</span>
+      <span class="jd-pay">28–45K × 13 薪</span>
+    </div>
+    <div class="jd-body">
+      <b>职责：</b>负责 AI 客服 Agent 系统的设计、开发与迭代，实现智能对话、工具调用、任务规划、多轮交互等核心能力；搭建可复用、可扩展的 Agent 能力框架。这是典型的<strong>「单 Agent + 强工程 + 明确业务场景」</strong>岗位，比多 Agent 更看重稳定性与并发。
+    </div>
+  </div>
+
+  <div class="jd" style="border-left-color:var(--purple);">
+    <div class="jd-head">
+      <span class="jd-title">AI Agent 工程师</span>
+      <span class="jd-co">深圳计算科学研究院 · 深圳 · 硕士 / 1–3 年</span>
+      <span class="jd-pay">面议</span>
+    </div>
+    <div class="jd-body">
+      <b>要求：</b>熟悉 AI Agent 相关技术体系，具备相关工程能力。科研机构路线，偏研究 + 工程结合，学历门槛最高（硕士），但竞争相对小。
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>四份 JD 的共同交集：</b>Python + 至少一个 Agent 框架 + RAG / 向量库 + Function Calling + 服务化封装 + 「独立交付过生产环境项目」。把这六项补齐，深圳 80% 的 Agent 岗位就够得上门槛。
+  </div>
+</section>
+
+<!-- ============ 七、面试考察 ============ -->
+<section>
+  <h2><span class="idx">7</span>面试实际会追问什么</h2>
+  <p class="lead">从大厂 AI Agent 岗位的真实面经看，面试不会考概念背诵，而是沿着你的项目一路深挖到系统底层。</p>
+
+  <div class="grid2">
+    <div class="mini">
+      <h4>一面：项目深挖 + RAG + 工程基础</h4>
+      <ul>
+        <li>完整讲一遍项目的流程与你负责的模块</li>
+        <li>RAG 离线建库 / 在线检索分别做了什么</li>
+        <li>Chunk 大小与重叠窗口的确定依据</li>
+        <li>ASR 识别效果怎么评估，专有名词怎么处理</li>
+        <li>隐私数据的传输 / 存储 / 访问安全</li>
+        <li>Agent 工具调用成功率怎么定义与提升</li>
+        <li>进程 / 线程 / 协程的区别与适用场景</li>
+        <li><b>手写：LRU Cache（get / put O(1)）</b></li>
+      </ul>
+    </div>
+    <div class="mini">
+      <h4>二面：架构 + 模型原理 + 系统能力</h4>
+      <ul>
+        <li>Agent 相比传统工作流优势在哪、生产难题是什么</li>
+        <li>Token 划分原理、为什么以 Token 为处理单元</li>
+        <li>Transformer / Self-Attention，Q、K、V 的作用</li>
+        <li>Lost in the Middle；上下文窗口是不是越大越好</li>
+        <li>超长对话怎么处理：滑动窗口 / 摘要 / 向量召回</li>
+        <li>SFT 流程，PPO / DPO / GRPO 的差异</li>
+        <li>为什么用多 Agent，多 Agent 结论冲突如何仲裁</li>
+        <li>线上 CPU 飙高 / 内存泄漏的排查思路</li>
+        <li>mmap、writev 解决什么问题</li>
+        <li><b>手写：扁平 JSON 还原树 / 二叉树锯齿层序遍历</b></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <b>一句话总结面经：</b>面试官会持续追问<b>方案选型理由、边界异常处理、线上故障排查</b>。没有真正动手落地过的项目，一定会在深挖环节暴露。「Demo 玩具」和「生产级」的区别，就是能不能答上异常处理、容错降级、效果评估这三类问题。
+  </div>
+</section>
+
+<!-- ============ 八、结论 ============ -->
+<section>
+  <h2><span class="idx">8</span>结论：一句话能力画像</h2>
+  <p class="lead">如果只记一件事：<strong>深圳的 AI Agent 岗位招的不是「会用大模型的人」，而是「能把大模型变成可靠系统的人」。</strong></p>
+
+  <div class="card">
+    <table>
+      <thead><tr><th>层次</th><th>能力项</th><th>优先级</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="5"><strong>硬门槛<br>（没有就进不去）</strong></td><td>Python 工程能力（含异步 / 并发）</td><td><span class="tag p0">必备</span></td></tr>
+        <tr><td>LangChain 或 LangGraph 实战</td><td><span class="tag p0">必备</span></td></tr>
+        <tr><td>RAG 全链路 + 向量数据库</td><td><span class="tag p0">必备</span></td></tr>
+        <tr><td>Function Calling / Tool Use</td><td><span class="tag p0">必备</span></td></tr>
+        <tr><td>至少 1 个生产级（非玩具）Agent 项目</td><td><span class="tag p0">必备</span></td></tr>
+        <tr><td rowspan="3"><strong>拉开差距<br>（决定薪资档位）</strong></td><td>服务化与工程化：FastAPI / Docker / 限流降级 / 可观测性</td><td><span class="tag p1">高价值</span></td></tr>
+        <tr><td>评估体系：LLM-as-Judge / 自动化评测 / 成本控制</td><td><span class="tag p1">高价值</span></td></tr>
+        <tr><td>业务抽象：把模糊需求拆成可执行任务链</td><td><span class="tag p1">高价值</span></td></tr>
+        <tr><td rowspan="3"><strong>加分项<br>（同岗溢价）</strong></td><td>多 Agent 协作（Supervisor / Reflexion）</td><td><span class="tag p2">加分</span></td></tr>
+        <tr><td>MCP 协议与工具链封装</td><td><span class="tag p2">加分</span></td></tr>
+        <tr><td>模型微调（SFT / LoRA）、多模态、端侧部署</td><td><span class="tag p2">加分</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>深圳的三个特色方向</h3>
+  <div class="grid3">
+    <div class="mini">
+      <h4>端侧 / 硬件 Agent</h4>
+      <p>大疆、vivo、安克、极米、拓竹。要求懂端侧 AI、嵌入式、硬件联调，<strong>纯软件思维做不了</strong>。这是深圳独有的溢价区。</p>
+    </div>
+    <div class="mini">
+      <h4>金融 Agent</h4>
+      <p>微众银行已有 80+ 数字员工，平安、招商、中信都在推。要求<strong>合规意识 + 金融知识 + AI 技术</strong>三重背景，可审计、可解释、可回滚是前提。</p>
+    </div>
+    <div class="mini">
+      <h4>大厂平台层</h4>
+      <p>腾讯 ima、字节飞书 Aily / 火山引擎、金蝶 Agent Harness。做的是基础设施和工具链，要求架构能力 + 大厂背景 + 出海英语。</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>行动建议：</b>① 先把 Python + LangGraph + RAG + Function Calling 跑通，做出<b>一个能讲 30 分钟的项目</b>；② 刻意补工程细节——异常处理、降级、限流、评测，这是面试的分差所在；③ 选一个深圳本地场景（客服 / 供应链 / 硬件交互 / 金融风控）做垂直深耕，比泛泛地学框架更有议价权；④ 投递优先级：AI 原生公司 / SaaS（门槛友好、项目主导）→ 硬件公司（深圳特色）→ 大厂（要求高但天花板高）。
+  </div>
+</section>
+
+<!-- ============ 九、渠道 ============ -->
+<section>
+  <h2><span class="idx">9</span>投递渠道与岗位聚集地</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>渠道</th><th>适合</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td><strong>BOSS 直聘</strong></td><td>社招 / 中小公司</td><td>直聊效率最高，深圳 Agent 岗位主战场</td></tr>
+        <tr><td><strong>猎聘</strong></td><td>中高端 / 架构级</td><td>50K+ 岗位集中，猎头主动联系</td></tr>
+        <tr><td><strong>牛客网</strong></td><td>校招 / 应届</td><td>大厂校招 + 真实面经的主要来源</td></tr>
+        <tr><td><strong>公司官网</strong></td><td>大厂 / 国企 / 科研</td><td>腾讯 careers.tencent.com、华为 career.huawei.com、字节 jobs.bytedance.com、大疆 we.dji.com</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card tight" style="margin-top:14px;">
+    <table>
+      <thead><tr><th>片区</th><th>代表企业 / 方向</th></tr></thead>
+      <tbody>
+        <tr><td><strong>南山区</strong></td><td>腾讯、大疆、深信服、字节、优必选、智平方 —— 深圳 AI 岗位最密集区</td></tr>
+        <tr><td><strong>福田区</strong></td><td>深交所、平安、招商、各类金融科技 —— 金融 Agent 聚集</td></tr>
+        <tr><td><strong>龙岗 / 坂田</strong></td><td>华为总部、硬件科技企业</td></tr>
+        <tr><td><strong>光明区</strong></td><td>半导体芯片、深圳湾实验室、欣旺达</td></tr>
+        <tr><td><strong>龙华 / 宝安</strong></td><td>电商、制造业 AI 融合、智能硬件</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <p><b>数据来源：</b>BOSS 直聘、牛客网、猎聘、智联招聘、企查查、Careerjet 公开岗位信息；CSDN / 掘金 / 黑马程序员等平台发布的深圳 Agent 岗位统计与真实面经整理（2026 年 5–10 月）。</p>
+  <p><b>说明：</b>BOSS 直聘岗位详情需登录查看，部分岗位信息来自公开转载与聚合页面，薪资与要求请以招聘平台实时信息为准。样本统计为区间估算，用于判断趋势而非精确计量。</p>
+  <p>整理时间：2026-10-08</p>
+</footer>
+
+</div>
+</body>
+</html>

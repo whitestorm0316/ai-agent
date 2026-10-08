@@ -1,0 +1,10 @@
+# 统一换行符，避免两台电脑（尤其 macOS ↔ Windows）之间出现整文件 diff
+* text=auto eol=lf
+
+# 二进制文件不要做换行符转换
+*.png binary
+*.jpg binary
+*.pdf binary
+
+# uv.lock 是生成物，合并冲突时不要按行合并
+uv.lock -diff merge=binary
